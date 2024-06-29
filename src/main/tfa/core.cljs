@@ -1,6 +1,5 @@
 (ns tfa.core
-  (:require ["three" :as three]
-            [odoyle.rules :as o]))
+  (:require ["three" :as three]))
 
 (defn init []
   (println "Hello"))
@@ -18,12 +17,6 @@
 (def cube (three/Mesh. geometry material))
 (. scene add cube)
 (set! (.. camera -position -z) 5)
-
-(def rules
-  (o/ruleset
-    {::tick-frame
-     [:what
-      [::time ::dt dt]]}))
 
 (defn draw []
   (. renderer render scene camera))
