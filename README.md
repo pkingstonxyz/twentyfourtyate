@@ -6,8 +6,17 @@ An food themed version of 2048 with sauce :)
  - [x] Get a basic app up and running
  - [x] Get a basic react-three-fiber setup up and running
  - [x] Design the game
- - [ ] Implement basic 2048 in 3d
- - [ ] Add
+ - [ ] Implement 2048 in 3d
+ - [ ] Add camera movements
+ - [ ] Add in time-based enhancements
+ - [ ] Add in like an app (start/restart)
+ - [ ] Add time freeze sauce
+ - [ ] Add remove sauce
+ - [ ] Add swap sauce
+ - [ ] Add randomness modifier sauce
+ - [ ] Model out tiles
+ - [ ] Add particle effects on merge
+ - [ ] Add particle effects on sauce enter
 
 ## Design:
 Improve on perfection
@@ -18,12 +27,12 @@ Speed-based score increases
 
  - (like the longer you're doing quick moves, the more you get(?))
 
-Powerups (flavored as like burger sauce)
+Sauce (flavored as like burger sauce)
 
  - Freeze time (doing a move doesn't make new tiles spawn for N moves)
  - Remove a particular tile
  - Swap two tiles
- - Undo
+ - Improve spawn
 
 ### Ideas:
 
