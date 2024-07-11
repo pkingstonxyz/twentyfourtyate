@@ -1,4 +1,5 @@
 {:deps true
+ :log {:level :debug}
  :builds {:app
           {:target :react-native
            :init-fn app.core/init
