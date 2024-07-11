@@ -8,8 +8,10 @@
   "main": "app/index.js",
   "dependencies": {
     "@react-native/metro-config": "^0.74.85",
+    "@react-spring/three": "^9.7.3",
+    "@react-three/drei": "^9.108.3",
     "@react-three/fiber": "^8.16.8",
-    "expo": "~51.0.19",
+    "expo": "~51.0.20",
     "expo-asset": "^10.0.10",
     "expo-file-system": "~17.0.1",
     "expo-gl": "~14.0.2",

@@ -1,0 +1,9 @@
+{
+"version":3,
+"file":"shadow.js.shim.module$$react_spring$native.js",
+"lineCount":5,
+"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,4CAAb,CAAA;AACAD,IAAKC,CAAAA,OAAL,CAAa,mDAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,2BAAf,GAA6CH,MAAOC,CAAAA,EAAGG,CAAAA,cAAV,CAAyB,sBAAzB,CAA7C,GAAgGC,OAAA,CAAQ,sBAAR,CAAhG;AACAC,iDAAkDC,CAAAA,OAAlD,GAA4DP,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,2BAA3E;;",
+"sources":["shadow.js.shim.module$$react_spring$native.js"],
+"sourcesContent":["goog.provide(\"shadow.js.shim.module$$react_spring$native\");\ngoog.provide(\"module$shadow_js_shim_module$$react_spring$native\");\nshadow.js.shim.module$$react_spring$native = shadow.js.nativeProvides[\"@react-spring/native\"] = require(\"@react-spring/native\");\nmodule$shadow_js_shim_module$$react_spring$native.default = shadow.js.shim.module$$react_spring$native;\n"],
+"names":["goog","provide","shadow","js","shim","module$$react_spring$native","nativeProvides","require","module$shadow_js_shim_module$$react_spring$native","default"]
+}
