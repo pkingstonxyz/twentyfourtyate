@@ -21,23 +21,25 @@
   :add-random-tile
   (fn [db _]
     (let [tile-list (flatten (:board db))
-          indexed-list (map-indexed (fn [idx itm] [idx itm]) tile-list)
-          empty-slots (filter (fn [idx itm]
-                                (not= (:val itm) 0)) indexed-list)
-          [picked-idx empty-tile] (rand-nth empty-slots)
-          [rowcoord colcoord] [(quot picked-idx 4) (mod picked-idx 4)]
-          newval (rand-nth [2 2 2 2 2 2 2 2 2 4])
-          newkey (:keynum db)]
-      (-> db
-          (assoc-in [:board rowcoord colcoord :val] newval)
-          (assoc-in [:board rowcoord colcoord :key] newkey)
-          (update-in [:keynum] inc)))))
+          empty-slots (filter #(zero? (:val %)) tile-list)]
+      (if (seq empty-slots)
+        (let [picked-tile (rand-nth empty-slots)
+                    rowcoord (:pos-y picked-tile)
+                    colcoord (:pos-x picked-tile)
+                    newval (rand-nth [2 2 2 2 2 2 2 2 2 4])
+                    newkey (:keynum db)]
+          (js/console.log "x: " colcoord ", y: " rowcoord)
+          (-> db
+                 (assoc-in [:board rowcoord colcoord :val] newval)
+                 (assoc-in [:board rowcoord colcoord :key] newkey)
+                 (update-in [:keynum] inc)))
+        db))))
  
 (rfx/reg-event-fx
   :move
   (fn [{:keys [db] :as cofx} [_ dir]]
     (let [moves (m/generate-board-moves (:board db) dir)]
-      (js/console.log (clj->js (:board db)))
+      #_(js/console.log (clj->js (:board db)))
       {:db db
        :fx [[:dispatch [:add-random-tile]]]})))
 
@@ -95,12 +97,13 @@
        children)))
 
 (defn tile [tileinfo]
-  ($ :mesh {:key (:key tileinfo)
-            :position #js [(- (:pos-x tileinfo) 1)
-                           (- (:pos-y tileinfo) 1)
-                           0]}
-     ($ :boxGeometry)
-     ($ :meshStandardMaterial {:color "orange"})))
+  (let [scale 1.2]
+    ($ :mesh {:key (:key tileinfo)
+              :position #js [(* scale (- (- (:pos-x tileinfo) 0) 1.5))
+                             (* scale (- (- 3 (:pos-y tileinfo)) 1.5))
+                             0]}
+        ($ :boxGeometry)
+        ($ :meshStandardMaterial {:color "orange"}))))
 
 (defui board []
   (let [board (rfx/use-sub [:board])]
@@ -115,7 +118,7 @@
         ($ :ambientLight {:intensity 1.57})
         ($ r3d/PerspectiveCamera {:makeDefault true 
                                   :rotation #js [0 0 0]
-                                  :position #js [0 0 15]})
+                                  :position #js [0 0 12]})
         #_($ :mesh
              ($ :boxGeometry {:args #js [1 1 1]})
              ($ :meshStandardMaterial {:color "orange"}))
