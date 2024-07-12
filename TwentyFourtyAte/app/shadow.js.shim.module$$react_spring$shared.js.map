@@ -1,9 +1,0 @@
-{
-"version":3,
-"file":"shadow.js.shim.module$$react_spring$shared.js",
-"lineCount":5,
-"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,4CAAb,CAAA;AACAD,IAAKC,CAAAA,OAAL,CAAa,mDAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,2BAAf,GAA6CH,MAAOC,CAAAA,EAAGG,CAAAA,cAAV,CAAyB,sBAAzB,CAA7C,GAAgGC,OAAA,CAAQ,sBAAR,CAAhG;AACAC,iDAAkDC,CAAAA,OAAlD,GAA4DP,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,2BAA3E;;",
-"sources":["shadow.js.shim.module$$react_spring$shared.js"],
-"sourcesContent":["goog.provide(\"shadow.js.shim.module$$react_spring$shared\");\ngoog.provide(\"module$shadow_js_shim_module$$react_spring$shared\");\nshadow.js.shim.module$$react_spring$shared = shadow.js.nativeProvides[\"@react-spring/shared\"] = require(\"@react-spring/shared\");\nmodule$shadow_js_shim_module$$react_spring$shared.default = shadow.js.shim.module$$react_spring$shared;\n"],
-"names":["goog","provide","shadow","js","shim","module$$react_spring$shared","nativeProvides","require","module$shadow_js_shim_module$$react_spring$shared","default"]
-}

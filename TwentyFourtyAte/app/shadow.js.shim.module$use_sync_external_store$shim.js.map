@@ -1,9 +1,0 @@
-{
-"version":3,
-"file":"shadow.js.shim.module$use_sync_external_store$shim.js",
-"lineCount":5,
-"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,oDAAb,CAAA;AACAD,IAAKC,CAAAA,OAAL,CAAa,2DAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,mCAAf,GAAqDH,MAAOC,CAAAA,EAAGG,CAAAA,cAAV,CAAyB,8BAAzB,CAArD,GAAgHC,OAAA,CAAQ,8BAAR,CAAhH;AACAC,yDAA0DC,CAAAA,OAA1D,GAAoEP,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,mCAAnF;;",
-"sources":["shadow.js.shim.module$use_sync_external_store$shim.js"],
-"sourcesContent":["goog.provide(\"shadow.js.shim.module$use_sync_external_store$shim\");\ngoog.provide(\"module$shadow_js_shim_module$use_sync_external_store$shim\");\nshadow.js.shim.module$use_sync_external_store$shim = shadow.js.nativeProvides[\"use-sync-external-store/shim\"] = require(\"use-sync-external-store/shim\");\nmodule$shadow_js_shim_module$use_sync_external_store$shim.default = shadow.js.shim.module$use_sync_external_store$shim;\n"],
-"names":["goog","provide","shadow","js","shim","module$use_sync_external_store$shim","nativeProvides","require","module$shadow_js_shim_module$use_sync_external_store$shim","default"]
-}

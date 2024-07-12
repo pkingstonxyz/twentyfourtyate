@@ -1,9 +1,0 @@
-{
-"version":3,
-"file":"shadow.js.shim.module$framer_motion_3d.js",
-"lineCount":5,
-"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,wCAAb,CAAA;AACAD,IAAKC,CAAAA,OAAL,CAAa,+CAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,uBAAf,GAAyCH,MAAOC,CAAAA,EAAGG,CAAAA,cAAV,CAAyB,kBAAzB,CAAzC,GAAwFC,OAAA,CAAQ,kBAAR,CAAxF;AACAC,6CAA8CC,CAAAA,OAA9C,GAAwDP,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,uBAAvE;;",
-"sources":["shadow.js.shim.module$framer_motion_3d.js"],
-"sourcesContent":["goog.provide(\"shadow.js.shim.module$framer_motion_3d\");\ngoog.provide(\"module$shadow_js_shim_module$framer_motion_3d\");\nshadow.js.shim.module$framer_motion_3d = shadow.js.nativeProvides[\"framer-motion-3d\"] = require(\"framer-motion-3d\");\nmodule$shadow_js_shim_module$framer_motion_3d.default = shadow.js.shim.module$framer_motion_3d;\n"],
-"names":["goog","provide","shadow","js","shim","module$framer_motion_3d","nativeProvides","require","module$shadow_js_shim_module$framer_motion_3d","default"]
-}
