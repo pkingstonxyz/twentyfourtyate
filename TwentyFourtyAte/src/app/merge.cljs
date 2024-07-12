@@ -5,67 +5,67 @@
   (and (number? a) (number? b) (= a b)))
 
 (defn generate-row-moves [[c0 c1 c2 c3] row]
-  (match [(:val c0) (:val c1) (:val c2) (:val c3)]
+  (match [(:tileval c0) (:tileval c1) (:tileval c2) (:tileval c3)]
          [0 0 0 0] nil
          ; 1 tile
          [a 0 0 0] nil
-         [0 a 0 0] {:from [row 1] :to [row 0] :merge false}
-         [0 0 a 0] {:from [row 2] :to [row 0] :merge false}
-         [0 0 0 a] {:from [row 3] :to [row 0] :merge false}
+         [0 a 0 0] {:from [row 1] :to [row 0] :merged false}
+         [0 0 a 0] {:from [row 2] :to [row 0] :merged false}
+         [0 0 0 a] {:from [row 3] :to [row 0] :merged false}
          ; 2 tiles
-         [a b 0 0] (cond (can-merge a b) {:from [row 1] :to [row 0] :merge true}
+         [a b 0 0] (cond (can-merge a b) {:from [row 1] :to [row 0] :merged true}
                          :else   nil)
-         [a 0 b 0] (cond (can-merge a b) {:from [row 2] :to [row 0] :merge true}
-                         :else   {:from [row 2] :to [row 1] :merge false})
-         [a 0 0 b] (cond (can-merge a b) {:from [row 3] :to [row 0] :merge true}
-                         :else   {:from [row 3] :to [row 1] :merge false})
-         [0 a b 0] (cond (can-merge a b) [{:from [row 1] :to [row 0] :merge false}
-                                          {:from [row 2] :to [row 0] :merge true}]
-                         :else   [{:from [row 1] :to [row 0] :merge false} 
-                                  {:from [row 2] :to [row 1] :merge false}])
-         [0 a 0 b] (cond (can-merge a b) [{:from [row 1] :to [row 0] :merge false}
-                                          {:from [row 3] :to [row 0] :merge true}]
-                         :else   [{:from [row 1] :to [row 0] :merge false}
-                                  {:from [row 3] :to [row 1] :merge false}])
-         [0 0 a b] (cond (can-merge a b) [{:from [row 2] :to [row 0] :merge false}
-                                          {:from [row 3] :to [row 0] :merge true}]
-                         :else   [{:from [row 2] :to [row 0] :merge false}
-                                  {:from [row 3] :to [row 1] :merge false}])
+         [a 0 b 0] (cond (can-merge a b) {:from [row 2] :to [row 0] :merged true}
+                         :else   {:from [row 2] :to [row 1] :merged false})
+         [a 0 0 b] (cond (can-merge a b) {:from [row 3] :to [row 0] :merged true}
+                         :else   {:from [row 3] :to [row 1] :merged false})
+         [0 a b 0] (cond (can-merge a b) [{:from [row 1] :to [row 0] :merged false}
+                                          {:from [row 2] :to [row 0] :merged true}]
+                         :else   [{:from [row 1] :to [row 0] :merged false} 
+                                  {:from [row 2] :to [row 1] :merged false}])
+         [0 a 0 b] (cond (can-merge a b) [{:from [row 1] :to [row 0] :merged false}
+                                          {:from [row 3] :to [row 0] :merged true}]
+                         :else   [{:from [row 1] :to [row 0] :merged false}
+                                  {:from [row 3] :to [row 1] :merged false}])
+         [0 0 a b] (cond (can-merge a b) [{:from [row 2] :to [row 0] :merged false}
+                                          {:from [row 3] :to [row 0] :merged true}]
+                         :else   [{:from [row 2] :to [row 0] :merged false}
+                                  {:from [row 3] :to [row 1] :merged false}])
          ; 3 tiles
-         [a b c 0] (cond (can-merge a b) [{:from [row 1] :to [row 0] :merge true}
-                                          {:from [row 2] :to [row 1] :merge false}]
-                         (can-merge b c) [{:from [row 2] :to [row 1] :merge true}]
+         [a b c 0] (cond (can-merge a b) [{:from [row 1] :to [row 0] :merged true}
+                                          {:from [row 2] :to [row 1] :merged false}]
+                         (can-merge b c) [{:from [row 2] :to [row 1] :merged true}]
                          :else nil)
-         [a b 0 c] (cond (can-merge a b) [{:from [row 1] :to [row 0] :merge true}
-                                          {:from [row 3] :to [row 1] :merge false}]
-                         (can-merge b c) {:from [row 3] :to [row 1] :merge true}
-                         :else {:from [row 3] :to [row 2] :merge false})
-         [a 0 b c] (cond (can-merge a b) [{:from [row 2] :to [row 0] :merge true}
-                                          {:from [row 3] :to [row 1] :merge false}]
-                         (can-merge b c) [{:from [row 2] :to [row 1] :merge false}
-                                          {:from [row 3] :to [row 1] :merge true}]
-                         :else [{:from [row 2] :to [row 1] :merge false}
-                                {:from [row 3] :to [row 2] :merge false}]) 
-         [0 a b c] (cond (can-merge a b) [{:from [row 1] :to [row 0] :merge false}
-                                          {:from [row 2] :to [row 0] :merge true}
-                                          {:from [row 3] :to [row 1] :merge false}]
-                         (can-merge b c) [{:from [row 1] :to [row 0] :merge false}
-                                          {:from [row 2] :to [row 1] :merge false}
-                                          {:from [row 3] :to [row 2] :merge true}]
-                         :else [{:from [row 1] :to [row 0] :merge false}
-                                {:from [row 2] :to [row 1] :merge false}
-                                {:from [row 3] :to [row 2] :merge false}])
+         [a b 0 c] (cond (can-merge a b) [{:from [row 1] :to [row 0] :merged true}
+                                          {:from [row 3] :to [row 1] :merged false}]
+                         (can-merge b c) {:from [row 3] :to [row 1] :merged true}
+                         :else {:from [row 3] :to [row 2] :merged false})
+         [a 0 b c] (cond (can-merge a b) [{:from [row 2] :to [row 0] :merged true}
+                                          {:from [row 3] :to [row 1] :merged false}]
+                         (can-merge b c) [{:from [row 2] :to [row 1] :merged false}
+                                          {:from [row 3] :to [row 1] :merged true}]
+                         :else [{:from [row 2] :to [row 1] :merged false}
+                                {:from [row 3] :to [row 2] :merged false}]) 
+         [0 a b c] (cond (can-merge a b) [{:from [row 1] :to [row 0] :merged false}
+                                          {:from [row 2] :to [row 0] :merged true}
+                                          {:from [row 3] :to [row 1] :merged false}]
+                         (can-merge b c) [{:from [row 1] :to [row 0] :merged false}
+                                          {:from [row 2] :to [row 1] :merged false}
+                                          {:from [row 3] :to [row 2] :merged true}]
+                         :else [{:from [row 1] :to [row 0] :merged false}
+                                {:from [row 2] :to [row 1] :merged false}
+                                {:from [row 3] :to [row 2] :merged false}])
          ; 4 tiles
          [a b c d] (cond (can-merge a b)
-                         (cond (can-merge c d) [{:from [row 1] :to [row 0] :merge true}
-                                                {:from [row 2] :to [row 1] :merge false}
-                                                {:from [row 3] :to [row 1] :merge true}]
-                               :else [{:from [row 1] :to [row 0] :merge true}
-                                      {:from [row 2] :to [row 1] :merge false}
-                                      {:from [row 3] :to [row 2] :merge false}])
-                         (can-merge b c) [{:from [row 2] :to [row 1] :merge true}
-                                          {:from [row 3] :to [row 2] :merge false}]
-                         (can-merge c d) {:from [row 3] :to [row 2] :merge true}
+                         (cond (can-merge c d) [{:from [row 1] :to [row 0] :merged true}
+                                                {:from [row 2] :to [row 1] :merged false}
+                                                {:from [row 3] :to [row 1] :merged true}]
+                               :else [{:from [row 1] :to [row 0] :merged true}
+                                      {:from [row 2] :to [row 1] :merged false}
+                                      {:from [row 3] :to [row 2] :merged false}])
+                         (can-merge b c) [{:from [row 2] :to [row 1] :merged true}
+                                          {:from [row 3] :to [row 2] :merged false}]
+                         (can-merge c d) {:from [row 3] :to [row 2] :merged true}
                          :else nil)))
 
 (defn sub3 [n] (- 3 n))

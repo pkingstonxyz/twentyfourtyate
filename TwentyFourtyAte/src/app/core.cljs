@@ -4,12 +4,12 @@
             [uix.core :refer [$ defui] :as uix]
             ["@react-three/fiber/native" :as r3f]
             ["@react-three/drei" :as r3d]
-            ["@react-spring/native" :as rs]
+            ["@react-spring/three" :as rs]
             [refx.alpha :as rfx]
             [app.merge :as m]))
 
 (defn init-board []
-  (vec (for [i (range 4)] (vec (for [j (range 4)] {:val 0 :key (+ (* 4 i) j) :pos-x j :pos-y i})))))
+  (vec (for [i (range 4)] (vec (for [j (range 4)] {:tileval 0 :tilekey (+ (* 4 i) j) :pos-x j :pos-y i})))))
 
 (rfx/reg-event-db
   :initialize
@@ -21,44 +21,49 @@
   :add-random-tile
   (fn [db _]
     (let [tile-list (flatten (:board db))
-          empty-slots (filter #(zero? (:val %)) tile-list)]
+          empty-slots (filter #(zero? (:tileval %)) tile-list)]
       (if (seq empty-slots)
         (let [picked-tile (rand-nth empty-slots)
                     rowcoord (:pos-y picked-tile)
                     colcoord (:pos-x picked-tile)
-                    newval (rand-nth [2 2 2 2 2 2 2 2 2 4])
+                    newtileval (rand-nth [2 2 2 2 2 2 2 2 2 4])
                     newkey (:keynum db)]
-          (js/console.log "x: " colcoord ", y: " rowcoord)
+          (js/console.log "new: " #js [rowcoord colcoord])
           (-> db
-                 (assoc-in [:board rowcoord colcoord :val] newval)
-                 (assoc-in [:board rowcoord colcoord :key] newkey)
+                 (assoc-in [:board rowcoord colcoord :tileval] newtileval)
+                 (assoc-in [:board rowcoord colcoord :tilekey] newkey)
                  (update-in [:keynum] inc)))
         db))))
+
+(rfx/reg-event-db
+  :slide
+  (fn [db [_ {:keys [from to merged]}]] 
+    (let [[fromx fromy] from
+          [tox toy] to
+          fromtile (get-in db [:board fromy fromx])
+          totile (get-in db [:board toy tox])]
+      (-> db
+          (assoc-in [:board fromx fromy :pos-x] tox)
+          (assoc-in [:board fromx fromy :pos-y] toy))))) 
+
  
 (rfx/reg-event-fx
   :move
   (fn [{:keys [db] :as cofx} [_ dir]]
-    (let [moves (m/generate-board-moves (:board db) dir)]
-      #_(js/console.log (clj->js (:board db)))
+    (let [moves (m/generate-board-moves (:board db) dir)
+          slides (if (seq moves)
+                   (mapv (fn [movedata] [:dispatch [:slide movedata]]) moves)
+                   [])
+          effects (conj slides [:dispatch [:add-random-tile]])]
+      (js/console.log (clj->js dir))
       {:db db
-       :fx [[:dispatch [:add-random-tile]]]})))
+       :fx effects}))) 
 
 (rfx/reg-sub
   :board
   (fn [db _]
     (:board db)))
-(rfx/reg-sub
-  :animation-controller
-  (fn [db [_ idx]]
-    (get-in db [:animation-controllers idx])))
 
-(defui cube [{:keys [idx]}]
-  (let [api (rfx/use-sub [:animation-controller idx])
-        spring (rs/useSpring #js {:ref api
-                                  :x 0})]
-    ($ :mesh {:position-x spring}
-      ($ :boxGeometry {:args #js [1 1 1]})
-      ($ :meshStandardMaterial {:color "orange"}))))
 
 
 (defui swipe-detector [{:keys [children]}]
@@ -96,25 +101,31 @@
                                           (rfx/dispatch [:move :up]))))))}
        children)))
 
-(defn tile [tileinfo]
-  (let [scale 1.2]
-    ($ :mesh {:key (:key tileinfo)
-              :position #js [(* scale (- (- (:pos-x tileinfo) 0) 1.5))
-                             (* scale (- (- 3 (:pos-y tileinfo)) 1.5))
-                             0]}
+(defui tile [{:keys [tileinfo key]}]
+  (let [scale 1.2
+        pos-x (:pos-x tileinfo)
+        pos-y (:pos-y tileinfo)
+        tileval (:tileval tileinfo)
+        springs (rs/useSpring #js {:position #js [(:pos-x tileinfo)#_(* scale (- (- (:pos-x tileinfo) 0) 1.5))
+                                                  (:pos-y tileinfo)#_(* scale (- (- 3 (:pos-y tileinfo)) 1.5))
+                                                  0]})]
+    ($ rs/animated.mesh {:key key
+                         :position (.-position springs)} 
         ($ :boxGeometry)
-        ($ :meshStandardMaterial {:color "orange"}))))
+        ($ :meshStandardMaterial {:color ({2 "#ffaaaa"
+                                           4 "#ff8888"} tileval)}))))
 
 (defui board []
-  (let [board (rfx/use-sub [:board])]
-    (->> board
-        flatten
-        (filter #(not (zero? (:val %))))
-        (map tile)))) 
+  (let [board (rfx/use-sub [:board])
+        tiles (->> board
+                    flatten
+                    (filter #(not (zero? (:tileval %)))))]
+    (for [tileinfo tiles]
+      ($ tile {:key (:tilekey tileinfo) :tileinfo tileinfo}))))
 
 (defui root []
   ($ swipe-detector
-     ($ r3f/Canvas
+     ($ r3f/Canvas #_{:frameloop "demand"}
         ($ :ambientLight {:intensity 1.57})
         ($ r3d/PerspectiveCamera {:makeDefault true 
                                   :rotation #js [0 0 0]
