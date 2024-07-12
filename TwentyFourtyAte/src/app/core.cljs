@@ -28,7 +28,7 @@
                     colcoord (:pos-x picked-tile)
                     newtileval (rand-nth [2 2 2 2 2 2 2 2 2 4])
                     newkey (:keynum db)]
-          (js/console.log "new: " #js [rowcoord colcoord])
+          #_(js/console.log "new: " #js [rowcoord colcoord])
           (-> db
                  (assoc-in [:board rowcoord colcoord :tileval] newtileval)
                  (assoc-in [:board rowcoord colcoord :tilekey] newkey)
@@ -38,13 +38,23 @@
 (rfx/reg-event-db
   :slide
   (fn [db [_ {:keys [from to merged]}]] 
-    (let [[fromx fromy] from
-          [tox toy] to
-          fromtile (get-in db [:board fromy fromx])
-          totile (get-in db [:board toy tox])]
-      (-> db
-          (assoc-in [:board fromx fromy :pos-x] tox)
-          (assoc-in [:board fromx fromy :pos-y] toy))))) 
+      (let [[fromrow fromcol] from
+              [torow tocol]     to
+              fromtile  (get-in db [:board fromrow fromcol])
+              oldval (:tileval fromtile)
+              reposed-from (-> fromtile
+                               (assoc :pos-x tocol)
+                               (assoc :pos-y torow))
+              newkey (db :keynum)
+              newdb (-> db
+                             (assoc-in [:board torow tocol] reposed-from)
+                             (assoc-in [:board fromrow fromcol :tileval] 0)
+                             (assoc-in [:board fromrow fromcol :tilekey] newkey)
+                             (update-in [:keynum] inc))]
+        (if merged
+          (-> newdb
+              (assoc-in [:board torow tocol :tileval] (* 2 oldval)))
+          newdb))))
 
  
 (rfx/reg-event-fx
@@ -55,9 +65,9 @@
                    (mapv (fn [movedata] [:dispatch [:slide movedata]]) moves)
                    [])
           effects (conj slides [:dispatch [:add-random-tile]])]
-      (js/console.log (clj->js dir))
+      #_(js/console.log (clj->js moves))
       {:db db
-       :fx effects}))) 
+       :fx #_slides effects}))) 
 
 (rfx/reg-sub
   :board
@@ -106,14 +116,26 @@
         pos-x (:pos-x tileinfo)
         pos-y (:pos-y tileinfo)
         tileval (:tileval tileinfo)
-        springs (rs/useSpring #js {:position #js [(:pos-x tileinfo)#_(* scale (- (- (:pos-x tileinfo) 0) 1.5))
-                                                  (:pos-y tileinfo)#_(* scale (- (- 3 (:pos-y tileinfo)) 1.5))
-                                                  0]})]
+        springs (rs/useSpring #js {:position #js [#_(:pos-x tileinfo)(* scale (- (- (:pos-x tileinfo) 0) 1.5))
+                                                  #_(:pos-y tileinfo)(* scale (- (- 3 (:pos-y tileinfo)) 1.5))
+                                                  0]
+                                   :config #js {:mass 1
+                                                :tension 600
+                                                :friction 30}})]
     ($ rs/animated.mesh {:key key
                          :position (.-position springs)} 
         ($ :boxGeometry)
-        ($ :meshStandardMaterial {:color ({2 "#ffaaaa"
-                                           4 "#ff8888"} tileval)}))))
+        ($ :meshStandardMaterial {:color ({2    "#f18c55"
+                                           4    "#de7033"
+                                           8    "#ca5310"
+                                           16   "#ad3c0e"
+                                           32   "#9e310d"
+                                           64   "#8f250c"
+                                           128  "#691e06"
+                                           256  "#441e15"
+                                           512  "#311e1d"
+                                           1024 "#1e1e24"
+                                           2048 "#000000"} tileval)}))))
 
 (defui board []
   (let [board (rfx/use-sub [:board])
