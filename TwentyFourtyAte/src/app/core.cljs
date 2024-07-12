@@ -116,26 +116,35 @@
         pos-x (:pos-x tileinfo)
         pos-y (:pos-y tileinfo)
         tileval (:tileval tileinfo)
-        springs (rs/useSpring #js {:position #js [#_(:pos-x tileinfo)(* scale (- (- (:pos-x tileinfo) 0) 1.5))
-                                                  #_(:pos-y tileinfo)(* scale (- (- 3 (:pos-y tileinfo)) 1.5))
+        springs (rs/useSpring #js {:position #js [(* scale (- (- (:pos-x tileinfo) 0) 1.5))
+                                                  (* scale (- (- 3 (:pos-y tileinfo)) 1.5))
                                                   0]
                                    :config #js {:mass 1
                                                 :tension 600
-                                                :friction 30}})]
-    ($ rs/animated.mesh {:key key
-                         :position (.-position springs)} 
-        ($ :boxGeometry)
-        ($ :meshStandardMaterial {:color ({2    "#f18c55"
-                                           4    "#de7033"
-                                           8    "#ca5310"
-                                           16   "#ad3c0e"
-                                           32   "#9e310d"
-                                           64   "#8f250c"
-                                           128  "#691e06"
-                                           256  "#441e15"
-                                           512  "#311e1d"
-                                           1024 "#1e1e24"
-                                           2048 "#000000"} tileval)}))))
+                                                :friction 30}})
+        transition (rs/useTransition (:tileval tileinfo)
+                                     #js {:from #js {:scale 0.5}
+                                          :enter #js {:scale 1}
+                                          :leave #js {:scale 0}
+                                          :config #js {:mass 1
+                                                       :tension 600
+                                                       :friction 30}})]
+    (transition (fn [scale item]
+                  ($ rs/animated.mesh {:key key
+                                       :position (.-position springs)
+                                       :scale (.-scale scale)} 
+                           ($ :boxGeometry)
+                           ($ :meshStandardMaterial {:color ({2    "#f18c55"
+                                                              4    "#de7033"
+                                                              8    "#ca5310"
+                                                              16   "#ad3c0e"
+                                                              32   "#9e310d"
+                                                              64   "#8f250c"
+                                                              128  "#691e06"
+                                                              256  "#441e15"
+                                                              512  "#311e1d"
+                                                              1024 "#1e1e24"
+                                                              2048 "#000000"} tileval)}))))))
 
 (defui board []
   (let [board (rfx/use-sub [:board])
@@ -159,4 +168,6 @@
 
 (defn ^:export init []
   (rfx/dispatch-sync [:initialize])
+  (rfx/dispatch-sync [:add-random-tile])
+  (rfx/dispatch-sync [:add-random-tile])
   (expo/registerRootComponent root))
