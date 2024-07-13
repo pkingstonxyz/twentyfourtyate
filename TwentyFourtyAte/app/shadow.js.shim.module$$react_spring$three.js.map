@@ -1,0 +1,9 @@
+{
+"version":3,
+"file":"shadow.js.shim.module$$react_spring$three.js",
+"lineCount":5,
+"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,2CAAb,CAAA;AACAD,IAAKC,CAAAA,OAAL,CAAa,kDAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,0BAAf,GAA4CH,MAAOC,CAAAA,EAAGG,CAAAA,cAAV,CAAyB,qBAAzB,CAA5C,GAA8FC,OAAA,CAAQ,qBAAR,CAA9F;AACAC,gDAAiDC,CAAAA,OAAjD,GAA2DP,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,0BAA1E;;",
+"sources":["shadow.js.shim.module$$react_spring$three.js"],
+"sourcesContent":["goog.provide(\"shadow.js.shim.module$$react_spring$three\");\ngoog.provide(\"module$shadow_js_shim_module$$react_spring$three\");\nshadow.js.shim.module$$react_spring$three = shadow.js.nativeProvides[\"@react-spring/three\"] = require(\"@react-spring/three\");\nmodule$shadow_js_shim_module$$react_spring$three.default = shadow.js.shim.module$$react_spring$three;\n"],
+"names":["goog","provide","shadow","js","shim","module$$react_spring$three","nativeProvides","require","module$shadow_js_shim_module$$react_spring$three","default"]
+}

@@ -1,9 +1,10 @@
 (ns app.core
-  (:require [react-native :as rn]
+  (:require [react :as r]
+            [react-native :as rn]
             ["expo" :as expo]
             [uix.core :refer [$ defui] :as uix]
             ["@react-three/fiber/native" :as r3f]
-            ["@react-three/drei" :as r3d]
+            ["@react-three/drei/native" :as r3d]
             ["@react-spring/three" :as rs]
             [refx.alpha :as rfx]
             [app.merge :as m]))
@@ -11,11 +12,14 @@
 (defn init-board []
   (vec (for [i (range 4)] (vec (for [j (range 4)] {:tileval 0 :tilekey (+ (* 4 i) j) :pos-x j :pos-y i})))))
 
-(rfx/reg-event-db
+(rfx/reg-event-fx
   :initialize
   (fn [_ _]
-    {:board (init-board)
-     :keynum 16}))
+    {:db {:board (init-board)
+          :keynum 16
+          :movecount 0}
+     :fx [[:dispatch [:add-random-tile]]
+          [:dispatch [:add-random-tile]]]}))
 
 (rfx/reg-event-db
   :add-random-tile
@@ -66,15 +70,23 @@
                    [])
           effects (conj slides [:dispatch [:add-random-tile]])]
       #_(js/console.log (clj->js moves))
-      {:db db
+      {:db (update db :movecount inc)
        :fx #_slides effects}))) 
+
+(rfx/reg-event-db
+  :inctime
+  (fn [db [_ delta]]
+    (update db :gametime #(+ delta %))))
 
 (rfx/reg-sub
   :board
   (fn [db _]
     (:board db)))
 
-
+(rfx/reg-sub
+  :movecount
+  (fn [db _]
+    (:movecount db)))
 
 (defui swipe-detector [{:keys [children]}]
   (let [[x set-x!] (uix/use-state 0.0) 
@@ -134,18 +146,48 @@
                                        :position (.-position springs)
                                        :scale (.-scale scale)} 
                            ($ :boxGeometry)
-                           ($ :meshStandardMaterial {:color ({2    "#f18c55"
-                                                              4    "#de7033"
-                                                              8    "#ca5310"
-                                                              16   "#ad3c0e"
-                                                              32   "#9e310d"
-                                                              64   "#8f250c"
-                                                              128  "#691e06"
-                                                              256  "#441e15"
-                                                              512  "#311e1d"
-                                                              1024 "#1e1e24"
+                           ($ :meshStandardMaterial {:color ({2    "#c86a6d"
+                                                              4    "#cc6b3e"
+                                                              8    "#e19c3d"
+                                                              16   "#b7a852"
+                                                              32   "#9cb36b"
+                                                              64   "#89a990"
+                                                              128  "#709997"
+                                                              256  "#6494aa"
+                                                              512  "#967fad"
+                                                              1024 "#c769b0"
                                                               2048 "#000000"} tileval)}))))))
 
+(defui totalMoves []
+  (let [movecount (rfx/use-sub [:movecount])]
+    ($ rn/Text {:style {:font-size 60}}
+       (str "Moves: " movecount))))
+
+(defui ui []
+  ($ rn/View {:style {:position "absolute"
+                      :top 0
+                      :left 0
+                      :width "100%"
+                      :height "100%"}}
+     ($ rn/StatusBar)
+     ($ rn/View {:style {:margin-top 10
+                         :margin-left 10
+                         :margin-right 10
+                         :height "20%"}}
+        ($ rn/View {:style {:flex 1
+                            :flexDirection "column"
+                            :justifyContent "center"
+                            :alignItems "center"}}
+           ($ totalMoves)))))
+        
+
+(defui reset-button []
+            :onClick (fn [_] 
+                       (rfx/dispatch [:initialize]))
+     ($ :meshStandardMaterial {:color "#22aa22"}) 
+     ($ :meshStandardMaterial {:color "#22aa22"}) 
+     ($ :meshStandardMaterial {:color "#22aa22"})) 
+       
 (defui board []
   (let [board (rfx/use-sub [:board])
         tiles (->> board
@@ -156,18 +198,16 @@
 
 (defui root []
   ($ swipe-detector
-     ($ r3f/Canvas #_{:frameloop "demand"}
-        ($ :ambientLight {:intensity 1.57})
+    ($ r3f/Canvas #_{:frameloop "demand"}
+        ($ :ambientLight {:intensity 3})
         ($ r3d/PerspectiveCamera {:makeDefault true 
                                   :rotation #js [0 0 0]
                                   :position #js [0 0 12]})
-        #_($ :mesh
-             ($ :boxGeometry {:args #js [1 1 1]})
-             ($ :meshStandardMaterial {:color "orange"}))
-        ($ board))))
+        ($ board)
+        ($ reset-button))
+    ($ ui)))
+        
 
 (defn ^:export init []
   (rfx/dispatch-sync [:initialize])
-  (rfx/dispatch-sync [:add-random-tile])
-  (rfx/dispatch-sync [:add-random-tile])
   (expo/registerRootComponent root))
