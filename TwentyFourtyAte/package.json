@@ -9,6 +9,7 @@
   },
   "main": "app/index.js",
   "dependencies": {
+    "@expo/config-plugins": "~8.0.0",
     "@react-native/metro-config": "^0.74.85",
     "@react-spring/three": "^9.7.3",
     "@react-three/drei": "^9.108.3",
@@ -16,9 +17,9 @@
     "eas-cli": "^10.1.1",
     "expo": "~51.0.20",
     "expo-asset": "^10.0.10",
+    "expo-dev-client": "~4.0.20",
     "expo-file-system": "~17.0.1",
     "expo-gl": "~14.0.2",
-    "expo-modules-core": "~1.12.19",
     "expo-three": "^7.0.1",
     "expo-updates": "~0.25.19",
     "react": "18.2.0",
