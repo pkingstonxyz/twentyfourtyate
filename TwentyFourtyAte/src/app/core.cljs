@@ -21,7 +21,9 @@
           :score 0
           :frozen? false
           :frozen-moves-left 0
-          :can-remove? false}
+          :can-remove? false
+          :swap {:can-swap? false
+                 :tile-1-pos nil}}
      :fx [[:dispatch [:add-random-tile]]
           [:dispatch [:add-random-tile]]]}))
 
@@ -30,9 +32,10 @@
 
 (def possible-tiles
   (tiles-by-probabilities {2 90
-                           4 8
+                           4 7
                            :freeze 1
-                           :remove 1}))
+                           :remove 1
+                           :swap   1}))
 (rfx/reg-event-db
   :add-random-tile
   (fn [db _]
@@ -124,17 +127,45 @@
         (assoc :can-remove? true))))
 
 (rfx/reg-event-db
-  :remove
+  :swap-sauce
   (fn [db [_ [pos-x pos-y]]]
-    (let [newkey (:keynum db)
-          can-remove? (:can-remove? db)]
-      (if can-remove?
+    (-> db
+        (remove-tile pos-x pos-y)
+        (assoc-in [:swap :can-swap?] true))))
+
+(defn handle-swap [db pos-x pos-y]
+  (let [tile-1-coords (-> db :swap :tile-1-pos)]
+    (if tile-1-coords
+      (let [[t1x t1y] tile-1-coords
+            tile-1 (get-in db [:board t1y t1x])
+            tile-2 (get-in db [:board pos-y pos-x])
+            moved-tile-1 (-> tile-1
+                             (assoc :pos-x pos-x)
+                             (assoc :pos-y pos-y))
+            moved-tile-2 (-> tile-2
+                             (assoc :pos-x t1x)
+                             (assoc :pos-y t1y))]
+                             
         (-> db
-                   (assoc-in [:board pos-y pos-x :tileval] 0)
-                   (assoc-in [:board pos-y pos-x :tilekey] newkey)
-                   (update :keynum inc)
-                   (assoc :can-remove? false))
-        db))))
+            (assoc-in [:board t1y t1x] moved-tile-2)
+            (assoc-in [:board pos-y pos-x] moved-tile-1)
+            (assoc-in [:swap :tile-1-pos] nil)
+            (assoc-in [:swap :can-swap?] false)))
+      (-> db
+          (assoc-in [:swap :tile-1-pos] [pos-x pos-y])))))
+
+(rfx/reg-event-db
+  :clicked
+  (fn [db [_ [pos-x pos-y]]]
+    (js/console.log (clj->js db))
+    (let [can-remove? (:can-remove? db)
+          can-swap? (-> db :swap :can-swap?)]
+      (cond 
+        can-remove? (-> db
+                      (remove-tile pos-x pos-y)
+                      (assoc :can-remove? false))
+        can-swap? (handle-swap db pos-x pos-y)
+        :else db))))
 
 (rfx/reg-sub
   :board
@@ -212,9 +243,8 @@
                                                   (case tileval
                                                     :freeze (rfx/dispatch [:freeze [pos-x pos-y]])
                                                     :remove (rfx/dispatch [:remove-sauce [pos-x pos-y]])
-                                                    (rfx/dispatch [:remove [pos-x pos-y]])))}
-                                                    
-                                                    
+                                                    :swap   (rfx/dispatch [:swap-sauce [pos-x pos-y]])
+                                                    (rfx/dispatch [:clicked [pos-x pos-y]])))}
                            ($ :boxGeometry)
                            ($ :meshStandardMaterial {:color ({0    "#ffffff"
                                                               2    "#c86a6d"
@@ -229,7 +259,8 @@
                                                               1024 "#c769b0"
                                                               2048 "#000000"
                                                               :freeze "#ccccff"
-                                                              :remove "#ff0000"} tileval)}))))))
+                                                              :remove "#ff0000"
+                                                              :swap   "#0000ff"} tileval)}))))))
 
 (defui totalMoves []
   (let [movecount (rfx/use-sub [:movecount])]

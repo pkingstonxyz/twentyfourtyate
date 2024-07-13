@@ -12,7 +12,7 @@ An food themed version of 2048 with sauce :)
  - [x] Add in move counter
  - [x] Add time freeze sauce
  - [x] Add remove sauce
- - [ ] Add swap sauce
+ - [x] Add swap sauce
  - [ ] Add randomness modifier sauce
  - [ ] Model out tiles
  - [ ] Add particle effects on merge
