@@ -81,7 +81,7 @@
     db))
 
 (defn add-tile-if-not-frozen [effects frozen?] 
-  (if frozen? 
+  (if (or frozen? (zero? (count effects)))
     effects
     (conj effects [:dispatch [:add-random-tile]])))
 
