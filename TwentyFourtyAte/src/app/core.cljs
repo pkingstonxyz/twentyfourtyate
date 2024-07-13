@@ -20,16 +20,19 @@
           :movecount 0
           :score 0
           :frozen? false
-          :frozen-moves-left 0}
+          :frozen-moves-left 0
+          :can-remove? false}
      :fx [[:dispatch [:add-random-tile]]
           [:dispatch [:add-random-tile]]]}))
 
 (defn tiles-by-probabilities [probabilities]
   (mapcat (fn [[k v]] (repeat v k)) probabilities))
+
 (def possible-tiles
   (tiles-by-probabilities {2 90
-                           4 9
-                           :freeze 1}))
+                           4 8
+                           :freeze 1
+                           :remove 1}))
 (rfx/reg-event-db
   :add-random-tile
   (fn [db _]
@@ -98,16 +101,40 @@
       {:db newdb
        :fx effects}))) 
 
+(defn remove-tile [db pos-x pos-y]
+  (let [newkey (:keynum db)]
+    (-> db
+        (assoc-in [:board pos-y pos-x :tileval] 0)
+        (assoc-in [:board pos-y pos-x :tilekey] newkey)
+        (update :keynum inc))))
+
 (rfx/reg-event-db
   :freeze
   (fn [db [_ [pos-x pos-y]]]
-    (let [newkey (:keynum db)]
       (-> db
-            (assoc-in [:board pos-y pos-x :tileval] 0)
-            #_(assoc-in [:board pos-y pos-x :tilekey] newkey)
-            #_(update :keynum inc)
-            (assoc :frozen? true)
-            (assoc :frozen-moves-left 2)))))
+          (remove-tile pos-x pos-y)
+          (assoc :frozen? true)
+          (assoc :frozen-moves-left 2))))
+
+(rfx/reg-event-db
+  :remove-sauce
+  (fn [db [_ [pos-x pos-y]]]
+    (-> db
+        (remove-tile pos-x pos-y)
+        (assoc :can-remove? true))))
+
+(rfx/reg-event-db
+  :remove
+  (fn [db [_ [pos-x pos-y]]]
+    (let [newkey (:keynum db)
+          can-remove? (:can-remove? db)]
+      (if can-remove?
+        (-> db
+                   (assoc-in [:board pos-y pos-x :tileval] 0)
+                   (assoc-in [:board pos-y pos-x :tilekey] newkey)
+                   (update :keynum inc)
+                   (assoc :can-remove? false))
+        db))))
 
 (rfx/reg-sub
   :board
@@ -184,7 +211,9 @@
                                        :onClick (fn [_]
                                                   (case tileval
                                                     :freeze (rfx/dispatch [:freeze [pos-x pos-y]])
-                                                    (+ 1 1)))}
+                                                    :remove (rfx/dispatch [:remove-sauce [pos-x pos-y]])
+                                                    (rfx/dispatch [:remove [pos-x pos-y]])))}
+                                                    
                                                     
                            ($ :boxGeometry)
                            ($ :meshStandardMaterial {:color ({0    "#ffffff"
@@ -199,7 +228,8 @@
                                                               512  "#967fad"
                                                               1024 "#c769b0"
                                                               2048 "#000000"
-                                                              :freeze "#ccccff"} tileval)}))))))
+                                                              :freeze "#ccccff"
+                                                              :remove "#ff0000"} tileval)}))))))
 
 (defui totalMoves []
   (let [movecount (rfx/use-sub [:movecount])]

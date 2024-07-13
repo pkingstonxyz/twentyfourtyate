@@ -10,11 +10,10 @@ An food themed version of 2048 with sauce :)
  - [x] Add a reset button
  - [x] Add a score tracker
  - [x] Add in move counter
- - [ ] Add time freeze sauce
- - [ ] Add remove sauce
+ - [x] Add time freeze sauce
+ - [x] Add remove sauce
  - [ ] Add swap sauce
  - [ ] Add randomness modifier sauce
- - [ ] Add undo sauce(?)
  - [ ] Model out tiles
  - [ ] Add particle effects on merge
  - [ ] Add particle effects on sauce enter
