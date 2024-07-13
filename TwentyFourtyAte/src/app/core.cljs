@@ -23,19 +23,22 @@
           :frozen-moves-left 0
           :can-remove? false
           :swap {:can-swap? false
-                 :tile-1-pos nil}}
+                 :tile-1-pos nil}
+          :base-probabilities {2 90
+                               4 6
+                               :freeze 1
+                               :remove 1
+                               :swap 1
+                               :random 1}
+          :fixed-probabilities {2 1}
+          :fixed-randomness? false
+          :fixed-random-moves-left 0}
      :fx [[:dispatch [:add-random-tile]]
           [:dispatch [:add-random-tile]]]}))
 
 (defn tiles-by-probabilities [probabilities]
   (mapcat (fn [[k v]] (repeat v k)) probabilities))
 
-(def possible-tiles
-  (tiles-by-probabilities {2 90
-                           4 7
-                           :freeze 1
-                           :remove 1
-                           :swap   1}))
 (rfx/reg-event-db
   :add-random-tile
   (fn [db _]
@@ -45,6 +48,9 @@
         (let [picked-tile (rand-nth empty-slots)
               rowcoord (:pos-y picked-tile)
               colcoord (:pos-x picked-tile)
+              possible-tiles (tiles-by-probabilities (if (:fixed-randomness? db)
+                                                       (:fixed-probabilities db)
+                                                       (:base-probabilities db)))
               newtileval (rand-nth possible-tiles)
               newkey (:keynum db)]
           (-> db
@@ -82,6 +88,13 @@
           (assoc :frozen? should-be-frozen-after?)
           (update :frozen-moves-left dec)))
     db))
+(defn update-random-db [db]
+  (if (:fixed-randomness? db)
+    (let [should-be-fixed-after? (> (:fixed-random-moves-left db) 1)]
+      (-> db
+          (assoc :fixed-randomness? should-be-fixed-after?)
+          (update :fixed-random-moves-left dec)))
+    db))
 
 (defn add-tile-if-not-frozen [effects frozen?] 
   (if (or frozen? (zero? (count effects)))
@@ -100,7 +113,8 @@
           #_#_effects (conj slides [:dispatch [:add-random-tile]])
           newdb (-> db
                     (update :movecount inc)
-                    update-frozen-db)]
+                    update-frozen-db
+                    update-random-db)]
       {:db newdb
        :fx effects}))) 
 
@@ -127,6 +141,14 @@
         (assoc :can-remove? true))))
 
 (rfx/reg-event-db
+  :random-sauce
+  (fn [db [_ [pos-x pos-y]]]
+    (-> db
+        (remove-tile pos-x pos-y)
+        (assoc :fixed-randomness? true)
+        (assoc :fixed-random-moves-left 5))))
+
+(rfx/reg-event-db
   :swap-sauce
   (fn [db [_ [pos-x pos-y]]]
     (-> db
@@ -135,7 +157,7 @@
 
 (defn handle-swap [db pos-x pos-y]
   (let [tile-1-coords (-> db :swap :tile-1-pos)]
-    (if tile-1-coords
+    (if (some? tile-1-coords)
       (let [[t1x t1y] tile-1-coords
             tile-1 (get-in db [:board t1y t1x])
             tile-2 (get-in db [:board pos-y pos-x])
@@ -145,7 +167,6 @@
             moved-tile-2 (-> tile-2
                              (assoc :pos-x t1x)
                              (assoc :pos-y t1y))]
-                             
         (-> db
             (assoc-in [:board t1y t1x] moved-tile-2)
             (assoc-in [:board pos-y pos-x] moved-tile-1)
@@ -244,6 +265,7 @@
                                                     :freeze (rfx/dispatch [:freeze [pos-x pos-y]])
                                                     :remove (rfx/dispatch [:remove-sauce [pos-x pos-y]])
                                                     :swap   (rfx/dispatch [:swap-sauce [pos-x pos-y]])
+                                                    :random (rfx/dispatch [:random-sauce [pos-x pos-y]])
                                                     (rfx/dispatch [:clicked [pos-x pos-y]])))}
                            ($ :boxGeometry)
                            ($ :meshStandardMaterial {:color ({0    "#ffffff"
@@ -258,9 +280,10 @@
                                                               512  "#967fad"
                                                               1024 "#c769b0"
                                                               2048 "#000000"
-                                                              :freeze "#ccccff"
+                                                              :freeze "#0000ff"
                                                               :remove "#ff0000"
-                                                              :swap   "#0000ff"} tileval)}))))))
+                                                              :swap   "#ffff00"
+                                                              :random "#00ff00"} tileval)}))))))
 
 (defui totalMoves []
   (let [movecount (rfx/use-sub [:movecount])]
