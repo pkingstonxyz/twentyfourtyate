@@ -6,8 +6,9 @@ An food themed version of 2048 with sauce :)
  - [x] Get a basic app up and running
  - [x] Get a basic react-three-fiber setup up and running
  - [x] Design the game
- - [ ] Implement 2048 in 3d
- - [ ] Add camera movements
+ - [x] Implement 2048 in 3d
+ - [ ] Add a reset button
+ - [ ] Add a score tracker
  - [ ] Add in time-based enhancements
  - [ ] Add in like an app (start/restart)
  - [ ] Add time freeze sauce
