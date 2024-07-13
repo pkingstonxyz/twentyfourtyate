@@ -14,9 +14,12 @@ An food themed version of 2048 with sauce :)
  - [ ] Add remove sauce
  - [ ] Add swap sauce
  - [ ] Add randomness modifier sauce
+ - [ ] Add undo sauce(?)
  - [ ] Model out tiles
  - [ ] Add particle effects on merge
  - [ ] Add particle effects on sauce enter
+ - [ ] Add sound effects
+ - [ ] Stretch: Implement high score and board state persistence to local storage
 
 ## Design:
 Improve on perfection

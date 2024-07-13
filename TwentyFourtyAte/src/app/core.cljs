@@ -18,10 +18,18 @@
     {:db {:board (init-board)
           :keynum 16
           :movecount 0
-          :score 0}
+          :score 0
+          :frozen? false
+          :frozen-moves-left 0}
      :fx [[:dispatch [:add-random-tile]]
           [:dispatch [:add-random-tile]]]}))
 
+(defn tiles-by-probabilities [probabilities]
+  (mapcat (fn [[k v]] (repeat v k)) probabilities))
+(def possible-tiles
+  (tiles-by-probabilities {2 90
+                           4 9
+                           :freeze 1}))
 (rfx/reg-event-db
   :add-random-tile
   (fn [db _]
@@ -29,11 +37,10 @@
           empty-slots (filter #(zero? (:tileval %)) tile-list)]
       (if (seq empty-slots)
         (let [picked-tile (rand-nth empty-slots)
-                    rowcoord (:pos-y picked-tile)
-                    colcoord (:pos-x picked-tile)
-                    newtileval (rand-nth [2 2 2 2 2 2 2 2 2 4])
-                    newkey (:keynum db)]
-          #_(js/console.log "new: " #js [rowcoord colcoord])
+              rowcoord (:pos-y picked-tile)
+              colcoord (:pos-x picked-tile)
+              newtileval (rand-nth possible-tiles)
+              newkey (:keynum db)]
           (-> db
                  (assoc-in [:board rowcoord colcoord :tileval] newtileval)
                  (assoc-in [:board rowcoord colcoord :tilekey] newkey)
@@ -50,11 +57,11 @@
               reposed-from (-> fromtile
                                (assoc :pos-x tocol)
                                (assoc :pos-y torow))
-              newkey (db :keynum)
+              newkeyfrom (db :keynum)
               newdb (-> db
                              (assoc-in [:board torow tocol] reposed-from)
                              (assoc-in [:board fromrow fromcol :tileval] 0)
-                             (assoc-in [:board fromrow fromcol :tilekey] newkey)
+                             (assoc-in [:board fromrow fromcol :tilekey] newkeyfrom)
                              (update-in [:keynum] inc))]
         (if merged
           (-> newdb
@@ -62,6 +69,19 @@
               (update :score #(+ % (* 2 oldval))))
           newdb))))
  
+(defn update-frozen-db [db]
+  (if (:frozen? db)
+    (let [should-be-frozen-after? (> (:frozen-moves-left db) 1)]
+      (-> db
+          (assoc :frozen? should-be-frozen-after?)
+          (update :frozen-moves-left dec)))
+    db))
+
+(defn add-tile-if-not-frozen [effects frozen?] 
+  (if frozen? 
+    effects
+    (conj effects [:dispatch [:add-random-tile]])))
+
 (rfx/reg-event-fx
   :move
   (fn [{:keys [db] :as cofx} [_ dir]]
@@ -69,15 +89,25 @@
           slides (if (seq moves)
                    (mapv (fn [movedata] [:dispatch [:slide movedata]]) moves)
                    [])
-          effects (conj slides [:dispatch [:add-random-tile]])]
-      #_(js/console.log (clj->js moves))
-      {:db (update db :movecount inc)
-       :fx #_slides effects}))) 
+          effects (-> slides
+                      (add-tile-if-not-frozen (:frozen? db)))
+          #_#_effects (conj slides [:dispatch [:add-random-tile]])
+          newdb (-> db
+                    (update :movecount inc)
+                    update-frozen-db)]
+      {:db newdb
+       :fx effects}))) 
 
 (rfx/reg-event-db
-  :inctime
-  (fn [db [_ delta]]
-    (update db :gametime #(+ delta %))))
+  :freeze
+  (fn [db [_ [pos-x pos-y]]]
+    (let [newkey (:keynum db)]
+      (-> db
+            (assoc-in [:board pos-y pos-x :tileval] 0)
+            #_(assoc-in [:board pos-y pos-x :tilekey] newkey)
+            #_(update :keynum inc)
+            (assoc :frozen? true)
+            (assoc :frozen-moves-left 2)))))
 
 (rfx/reg-sub
   :board
@@ -138,7 +168,7 @@
                                                   (* scale (- (- 3 (:pos-y tileinfo)) 1.5))
                                                   0]
                                    :config #js {:mass 1
-                                                :tension 600
+                                                :tension 1000
                                                 :friction 30}})
         transition (rs/useTransition (:tileval tileinfo)
                                      #js {:from #js {:scale 0.5}
@@ -150,9 +180,15 @@
     (transition (fn [scale item]
                   ($ rs/animated.mesh {:key key
                                        :position (.-position springs)
-                                       :scale (.-scale scale)} 
+                                       :scale (.-scale scale)
+                                       :onClick (fn [_]
+                                                  (case tileval
+                                                    :freeze (rfx/dispatch [:freeze [pos-x pos-y]])
+                                                    (+ 1 1)))}
+                                                    
                            ($ :boxGeometry)
-                           ($ :meshStandardMaterial {:color ({2    "#c86a6d"
+                           ($ :meshStandardMaterial {:color ({0    "#ffffff"
+                                                              2    "#c86a6d"
                                                               4    "#cc6b3e"
                                                               8    "#e19c3d"
                                                               16   "#b7a852"
@@ -162,7 +198,8 @@
                                                               256  "#6494aa"
                                                               512  "#967fad"
                                                               1024 "#c769b0"
-                                                              2048 "#000000"} tileval)}))))))
+                                                              2048 "#000000"
+                                                              :freeze "#ccccff"} tileval)}))))))
 
 (defui totalMoves []
   (let [movecount (rfx/use-sub [:movecount])]
@@ -204,7 +241,7 @@
   (let [board (rfx/use-sub [:board])
         tiles (->> board
                     flatten
-                    (filter #(not (zero? (:tileval %)))))]
+                    #_(filter #(not (zero? (:tileval %)))))]
     (for [tileinfo tiles]
       ($ tile {:key (:tilekey tileinfo) :tileinfo tileinfo}))))
 
