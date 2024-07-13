@@ -7,10 +7,9 @@ An food themed version of 2048 with sauce :)
  - [x] Get a basic react-three-fiber setup up and running
  - [x] Design the game
  - [x] Implement 2048 in 3d
- - [ ] Add a reset button
- - [ ] Add a score tracker
- - [ ] Add in time-based enhancements
- - [ ] Add in like an app (start/restart)
+ - [x] Add a reset button
+ - [x] Add a score tracker
+ - [x] Add in move counter
  - [ ] Add time freeze sauce
  - [ ] Add remove sauce
  - [ ] Add swap sauce
@@ -24,9 +23,9 @@ Improve on perfection
 
 ### What I'm going with:
 
-Speed-based score increases
+Move counter
 
- - (like the longer you're doing quick moves, the more you get(?))
+ - Move counter
 
 Sauce (flavored as like burger sauce)
 

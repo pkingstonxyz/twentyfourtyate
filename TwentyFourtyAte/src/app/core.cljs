@@ -17,7 +17,8 @@
   (fn [_ _]
     {:db {:board (init-board)
           :keynum 16
-          :movecount 0}
+          :movecount 0
+          :score 0}
      :fx [[:dispatch [:add-random-tile]]
           [:dispatch [:add-random-tile]]]}))
 
@@ -57,9 +58,9 @@
                              (update-in [:keynum] inc))]
         (if merged
           (-> newdb
-              (assoc-in [:board torow tocol :tileval] (* 2 oldval)))
+              (assoc-in [:board torow tocol :tileval] (* 2 oldval))
+              (update :score #(+ % (* 2 oldval))))
           newdb))))
-
  
 (rfx/reg-event-fx
   :move
@@ -87,6 +88,11 @@
   :movecount
   (fn [db _]
     (:movecount db)))
+
+(rfx/reg-sub
+  :score
+  (fn [db _]
+    (:score db)))
 
 (defui swipe-detector [{:keys [children]}]
   (let [[x set-x!] (uix/use-state 0.0) 
@@ -163,6 +169,11 @@
     ($ rn/Text {:style {:font-size 60}}
        (str "Moves: " movecount))))
 
+(defui score-board []
+  (let [score (rfx/use-sub [:score])]
+    ($ rn/Text {:style {:font-size 60}}
+       (str "Score: " score))))
+
 (defui ui []
   ($ rn/View {:style {:position "absolute"
                       :top 0
@@ -178,15 +189,16 @@
                             :flexDirection "column"
                             :justifyContent "center"
                             :alignItems "center"}}
-           ($ totalMoves)))))
+           ($ totalMoves)
+           ($ score-board)))))
         
 
 (defui reset-button []
-            :onClick (fn [_] 
+  ($ :mesh {:onClick (fn [_]
                        (rfx/dispatch [:initialize]))
-     ($ :meshStandardMaterial {:color "#22aa22"}) 
-     ($ :meshStandardMaterial {:color "#22aa22"}) 
-     ($ :meshStandardMaterial {:color "#22aa22"})) 
+            :position #js [0 -3.5 0]}
+     ($ :boxGeometry)
+     ($ :meshStandardMaterial {:color "#22aa22"}))) 
        
 (defui board []
   (let [board (rfx/use-sub [:board])
