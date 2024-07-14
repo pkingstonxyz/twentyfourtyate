@@ -348,7 +348,9 @@
                                         :position #js [0 0 12]})
           ($ board)
           ($ reset-button)
-          ($ model2/Model2)
+          ($ r/Suspense
+             ($ model2/Model2 #js {:position #js [1 1 1]
+                                   :rotation #js [(/ 3.1415 2) 0 0]}))
           #_($ :primitive #js {:object model2}))
       ($ ui)))
         

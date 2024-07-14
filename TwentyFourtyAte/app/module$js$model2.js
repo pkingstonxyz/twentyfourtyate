@@ -1,6 +1,6 @@
 function Model2$$module$js$model2(props) {
   /** @const */ 
-  var $jscomp$destructuring$var0 = (0,shadow.js.shim.module$$react_three$drei.useGLTF)("/assets/models/2.glb");
+  var $jscomp$destructuring$var0 = (0,shadow.js.shim.module$$react_three$drei.useGLTF)("https://github.com/pkingstonxyz/twentyfourtyate/raw/main/TwentyFourtyAte/assets/models/2.glb");
   /** @const */ 
   var nodes = $jscomp$destructuring$var0.nodes;
   /** @const */ 
@@ -16,9 +16,9 @@ function Model2$$module$js$model2(props) {
     }
     return target;
   };
-  return React.createElement("group", _extends({}, props, {dispose:null}), React.createElement("group", {position:[0, -0.438, 0], scale:[0.5, 0.064, 0.5]}, React.createElement("mesh", {castShadow:true, receiveShadow:true, geometry:nodes.Cube003.geometry, material:materials["bun mat.001"]}), React.createElement("mesh", {castShadow:true, receiveShadow:true, geometry:nodes.Cube003_1.geometry, material:materials["bun mat"]})));
+  return shadow.js.shim.module$react.createElement("group", _extends({}, props, {dispose:null}), shadow.js.shim.module$react.createElement("group", {position:[0, -0.438, 0], scale:[0.5, 0.064, 0.5]}, shadow.js.shim.module$react.createElement("mesh", {castShadow:true, receiveShadow:true, geometry:nodes.Cube003.geometry,}), shadow.js.shim.module$react.createElement("mesh", {castShadow:true, receiveShadow:true, geometry:nodes.Cube003_1.geometry,})));
 }
-shadow.js.shim.module$$react_three$drei.useGLTF.preload("/assets/models/2.glb");
+shadow.js.shim.module$$react_three$drei.useGLTF.preload("https://github.com/pkingstonxyz/twentyfourtyate/raw/main/TwentyFourtyAte/assets/models/2.glb");
 /** @const */ 
 var module$js$model2 = {};
 /** @const */ 

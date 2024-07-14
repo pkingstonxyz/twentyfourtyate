@@ -13,12 +13,13 @@ An food themed version of 2048 with sauce :)
  - [x] Add time freeze sauce
  - [x] Add remove sauce
  - [x] Add swap sauce
- - [ ] Add randomness modifier sauce
+ - [x] Add randomness modifier sauce
  - [ ] Model out tiles
- - [ ] Add particle effects on merge
- - [ ] Add particle effects on sauce enter
- - [ ] Add sound effects
- - [ ] Stretch: Implement high score and board state persistence to local storage
+ - [ ] Model out reset button
+ - [ ] Model out plate
+ - [ ] Polish score counter
+ - [ ] Polish move counter
+ - [ ] Stretch: Implement high score and app-db persistence to local storage
 
 ## Design:
 Improve on perfection

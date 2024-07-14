@@ -1,7 +1,8 @@
 import { useGLTF } from '@react-three/drei'
+import React from 'react'
 
 export function Model2(props) {
-  const { nodes, materials } = useGLTF("/assets/models/2.glb")
+  const { nodes, materials } = useGLTF("https://github.com/pkingstonxyz/twentyfourtyate/raw/main/TwentyFourtyAte/assets/models/2.glb")
   var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 return React.createElement(
@@ -14,13 +15,11 @@ return React.createElement(
       castShadow: true,
       receiveShadow: true,
       geometry: nodes.Cube003.geometry,
-      material: materials['bun mat.001']
     }),
     React.createElement('mesh', {
       castShadow: true,
       receiveShadow: true,
       geometry: nodes.Cube003_1.geometry,
-      material: materials['bun mat']
     })
   )
 );
@@ -46,4 +45,4 @@ return React.createElement(
 //  )
 }
 
-useGLTF.preload("/assets/models/2.glb")
+useGLTF.preload("https://github.com/pkingstonxyz/twentyfourtyate/raw/main/TwentyFourtyAte/assets/models/2.glb")
