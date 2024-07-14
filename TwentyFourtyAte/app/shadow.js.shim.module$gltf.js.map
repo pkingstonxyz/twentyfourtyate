@@ -1,0 +1,9 @@
+{
+"version":3,
+"file":"shadow.js.shim.module$gltf.js",
+"lineCount":5,
+"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,4BAAb,CAAA;AACAD,IAAKC,CAAAA,OAAL,CAAa,mCAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,WAAf,GAA6BH,MAAOC,CAAAA,EAAGG,CAAAA,cAAV,CAAyB,MAAzB,CAA7B,GAAgEC,OAAA,CAAQ,MAAR,CAAhE;AACAC,iCAAkCC,CAAAA,OAAlC,GAA4CP,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,WAA3D;;",
+"sources":["shadow.js.shim.module$gltf.js"],
+"sourcesContent":["goog.provide(\"shadow.js.shim.module$gltf\");\ngoog.provide(\"module$shadow_js_shim_module$gltf\");\nshadow.js.shim.module$gltf = shadow.js.nativeProvides[\"gltf\"] = require(\"gltf\");\nmodule$shadow_js_shim_module$gltf.default = shadow.js.shim.module$gltf;\n"],
+"names":["goog","provide","shadow","js","shim","module$gltf","nativeProvides","require","module$shadow_js_shim_module$gltf","default"]
+}

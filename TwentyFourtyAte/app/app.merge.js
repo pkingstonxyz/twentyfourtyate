@@ -2,154 +2,154 @@ goog.provide('app.merge');
 app.merge.can_merge = (function app$merge$can_merge(a,b){
 return ((typeof a === 'number') && (((typeof b === 'number') && (cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(a,b)))));
 });
-app.merge.generate_row_moves = (function app$merge$generate_row_moves(p__28681,row){
-var vec__28682 = p__28681;
-var c0 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__28682,(0),null);
-var c1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__28682,(1),null);
-var c2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__28682,(2),null);
-var c3 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__28682,(3),null);
-var ocr_28685 = new cljs.core.Keyword(null,"tileval","tileval",252915903).cljs$core$IFn$_invoke$arity$1(c0);
-var ocr_28686 = new cljs.core.Keyword(null,"tileval","tileval",252915903).cljs$core$IFn$_invoke$arity$1(c1);
-var ocr_28687 = new cljs.core.Keyword(null,"tileval","tileval",252915903).cljs$core$IFn$_invoke$arity$1(c2);
-var ocr_28688 = new cljs.core.Keyword(null,"tileval","tileval",252915903).cljs$core$IFn$_invoke$arity$1(c3);
-try{if((ocr_28688 === (0))){
-try{if((ocr_28687 === (0))){
-try{if((ocr_28686 === (0))){
-try{if((ocr_28685 === (0))){
+app.merge.generate_row_moves = (function app$merge$generate_row_moves(p__38009,row){
+var vec__38010 = p__38009;
+var c0 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__38010,(0),null);
+var c1 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__38010,(1),null);
+var c2 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__38010,(2),null);
+var c3 = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__38010,(3),null);
+var ocr_38013 = new cljs.core.Keyword(null,"tileval","tileval",252915903).cljs$core$IFn$_invoke$arity$1(c0);
+var ocr_38014 = new cljs.core.Keyword(null,"tileval","tileval",252915903).cljs$core$IFn$_invoke$arity$1(c1);
+var ocr_38015 = new cljs.core.Keyword(null,"tileval","tileval",252915903).cljs$core$IFn$_invoke$arity$1(c2);
+var ocr_38016 = new cljs.core.Keyword(null,"tileval","tileval",252915903).cljs$core$IFn$_invoke$arity$1(c3);
+try{if((ocr_38016 === (0))){
+try{if((ocr_38015 === (0))){
+try{if((ocr_38014 === (0))){
+try{if((ocr_38013 === (0))){
 return null;
 } else {
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28714){if((e28714 instanceof Error)){
-var e__27667__auto__ = e28714;
+}catch (e38042){if((e38042 instanceof Error)){
+var e__27667__auto__ = e38042;
 if((e__27667__auto__ === cljs.core.match.backtrack)){
-var a = ocr_28685;
+var a = ocr_38013;
 return null;
 } else {
 throw e__27667__auto__;
 }
 } else {
-throw e28714;
+throw e38042;
 
 }
 }} else {
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28712){if((e28712 instanceof Error)){
-var e__27667__auto__ = e28712;
+}catch (e38040){if((e38040 instanceof Error)){
+var e__27667__auto__ = e38040;
 if((e__27667__auto__ === cljs.core.match.backtrack)){
-try{if((ocr_28685 === (0))){
-var a = ocr_28686;
+try{if((ocr_38013 === (0))){
+var a = ocr_38014;
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null);
 } else {
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28713){if((e28713 instanceof Error)){
-var e__27667__auto____$1 = e28713;
+}catch (e38041){if((e38041 instanceof Error)){
+var e__27667__auto____$1 = e38041;
 if((e__27667__auto____$1 === cljs.core.match.backtrack)){
 throw cljs.core.match.backtrack;
 } else {
 throw e__27667__auto____$1;
 }
 } else {
-throw e28713;
+throw e38041;
 
 }
 }} else {
 throw e__27667__auto__;
 }
 } else {
-throw e28712;
+throw e38040;
 
 }
 }} else {
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28709){if((e28709 instanceof Error)){
-var e__27667__auto__ = e28709;
+}catch (e38037){if((e38037 instanceof Error)){
+var e__27667__auto__ = e38037;
 if((e__27667__auto__ === cljs.core.match.backtrack)){
-try{if((ocr_28685 === (0))){
-try{if((ocr_28686 === (0))){
-var a = ocr_28687;
+try{if((ocr_38013 === (0))){
+try{if((ocr_38014 === (0))){
+var a = ocr_38015;
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null);
 } else {
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28711){if((e28711 instanceof Error)){
-var e__27667__auto____$1 = e28711;
+}catch (e38039){if((e38039 instanceof Error)){
+var e__27667__auto____$1 = e38039;
 if((e__27667__auto____$1 === cljs.core.match.backtrack)){
 throw cljs.core.match.backtrack;
 } else {
 throw e__27667__auto____$1;
 }
 } else {
-throw e28711;
+throw e38039;
 
 }
 }} else {
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28710){if((e28710 instanceof Error)){
-var e__27667__auto____$1 = e28710;
+}catch (e38038){if((e38038 instanceof Error)){
+var e__27667__auto____$1 = e38038;
 if((e__27667__auto____$1 === cljs.core.match.backtrack)){
 throw cljs.core.match.backtrack;
 } else {
 throw e__27667__auto____$1;
 }
 } else {
-throw e28710;
+throw e38038;
 
 }
 }} else {
 throw e__27667__auto__;
 }
 } else {
-throw e28709;
+throw e38037;
 
 }
 }} else {
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28693){if((e28693 instanceof Error)){
-var e__27667__auto__ = e28693;
+}catch (e38021){if((e38021 instanceof Error)){
+var e__27667__auto__ = e38021;
 if((e__27667__auto__ === cljs.core.match.backtrack)){
-try{if((ocr_28687 === (0))){
-try{if((ocr_28685 === (0))){
-try{if((ocr_28686 === (0))){
-var a = ocr_28688;
+try{if((ocr_38015 === (0))){
+try{if((ocr_38013 === (0))){
+try{if((ocr_38014 === (0))){
+var a = ocr_38016;
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(3)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null);
 } else {
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28708){if((e28708 instanceof Error)){
-var e__27667__auto____$1 = e28708;
+}catch (e38036){if((e38036 instanceof Error)){
+var e__27667__auto____$1 = e38036;
 if((e__27667__auto____$1 === cljs.core.match.backtrack)){
 throw cljs.core.match.backtrack;
 } else {
 throw e__27667__auto____$1;
 }
 } else {
-throw e28708;
+throw e38036;
 
 }
 }} else {
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28706){if((e28706 instanceof Error)){
-var e__27667__auto____$1 = e28706;
+}catch (e38034){if((e38034 instanceof Error)){
+var e__27667__auto____$1 = e38034;
 if((e__27667__auto____$1 === cljs.core.match.backtrack)){
-try{if((ocr_28688 === (0))){
-var a = ocr_28685;
-var b = ocr_28686;
+try{if((ocr_38016 === (0))){
+var a = ocr_38013;
+var b = ocr_38014;
 if(app.merge.can_merge(a,b)){
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null);
 } else {
@@ -160,35 +160,35 @@ return null;
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28707){if((e28707 instanceof Error)){
-var e__27667__auto____$2 = e28707;
+}catch (e38035){if((e38035 instanceof Error)){
+var e__27667__auto____$2 = e38035;
 if((e__27667__auto____$2 === cljs.core.match.backtrack)){
 throw cljs.core.match.backtrack;
 } else {
 throw e__27667__auto____$2;
 }
 } else {
-throw e28707;
+throw e38035;
 
 }
 }} else {
 throw e__27667__auto____$1;
 }
 } else {
-throw e28706;
+throw e38034;
 
 }
 }} else {
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28694){if((e28694 instanceof Error)){
-var e__27667__auto____$1 = e28694;
+}catch (e38022){if((e38022 instanceof Error)){
+var e__27667__auto____$1 = e38022;
 if((e__27667__auto____$1 === cljs.core.match.backtrack)){
-try{if((ocr_28686 === (0))){
-try{if((ocr_28688 === (0))){
-var b = ocr_28687;
-var a = ocr_28685;
+try{if((ocr_38014 === (0))){
+try{if((ocr_38016 === (0))){
+var b = ocr_38015;
+var a = ocr_38013;
 if(app.merge.can_merge(a,b)){
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null);
 } else {
@@ -199,12 +199,12 @@ return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"fr
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28704){if((e28704 instanceof Error)){
-var e__27667__auto____$2 = e28704;
+}catch (e38032){if((e38032 instanceof Error)){
+var e__27667__auto____$2 = e38032;
 if((e__27667__auto____$2 === cljs.core.match.backtrack)){
-try{if((ocr_28687 === (0))){
-var b = ocr_28688;
-var a = ocr_28685;
+try{if((ocr_38015 === (0))){
+var b = ocr_38016;
+var a = ocr_38013;
 if(app.merge.can_merge(a,b)){
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(3)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null);
 } else {
@@ -215,35 +215,35 @@ return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"fr
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28705){if((e28705 instanceof Error)){
-var e__27667__auto____$3 = e28705;
+}catch (e38033){if((e38033 instanceof Error)){
+var e__27667__auto____$3 = e38033;
 if((e__27667__auto____$3 === cljs.core.match.backtrack)){
 throw cljs.core.match.backtrack;
 } else {
 throw e__27667__auto____$3;
 }
 } else {
-throw e28705;
+throw e38033;
 
 }
 }} else {
 throw e__27667__auto____$2;
 }
 } else {
-throw e28704;
+throw e38032;
 
 }
 }} else {
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28695){if((e28695 instanceof Error)){
-var e__27667__auto____$2 = e28695;
+}catch (e38023){if((e38023 instanceof Error)){
+var e__27667__auto____$2 = e38023;
 if((e__27667__auto____$2 === cljs.core.match.backtrack)){
-try{if((ocr_28685 === (0))){
-try{if((ocr_28688 === (0))){
-var a = ocr_28686;
-var b = ocr_28687;
+try{if((ocr_38013 === (0))){
+try{if((ocr_38016 === (0))){
+var a = ocr_38014;
+var b = ocr_38015;
 if(app.merge.can_merge(a,b)){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null)], null);
 } else {
@@ -254,12 +254,12 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28701){if((e28701 instanceof Error)){
-var e__27667__auto____$3 = e28701;
+}catch (e38029){if((e38029 instanceof Error)){
+var e__27667__auto____$3 = e38029;
 if((e__27667__auto____$3 === cljs.core.match.backtrack)){
-try{if((ocr_28687 === (0))){
-var b = ocr_28688;
-var a = ocr_28686;
+try{if((ocr_38015 === (0))){
+var b = ocr_38016;
+var a = ocr_38014;
 if(app.merge.can_merge(a,b)){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(3)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null)], null);
 } else {
@@ -270,12 +270,12 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28702){if((e28702 instanceof Error)){
-var e__27667__auto____$4 = e28702;
+}catch (e38030){if((e38030 instanceof Error)){
+var e__27667__auto____$4 = e38030;
 if((e__27667__auto____$4 === cljs.core.match.backtrack)){
-try{if((ocr_28686 === (0))){
-var a = ocr_28687;
-var b = ocr_28688;
+try{if((ocr_38014 === (0))){
+var a = ocr_38015;
+var b = ocr_38016;
 if(app.merge.can_merge(a,b)){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(3)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null)], null);
 } else {
@@ -286,42 +286,42 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28703){if((e28703 instanceof Error)){
-var e__27667__auto____$5 = e28703;
+}catch (e38031){if((e38031 instanceof Error)){
+var e__27667__auto____$5 = e38031;
 if((e__27667__auto____$5 === cljs.core.match.backtrack)){
 throw cljs.core.match.backtrack;
 } else {
 throw e__27667__auto____$5;
 }
 } else {
-throw e28703;
+throw e38031;
 
 }
 }} else {
 throw e__27667__auto____$4;
 }
 } else {
-throw e28702;
+throw e38030;
 
 }
 }} else {
 throw e__27667__auto____$3;
 }
 } else {
-throw e28701;
+throw e38029;
 
 }
 }} else {
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28696){if((e28696 instanceof Error)){
-var e__27667__auto____$3 = e28696;
+}catch (e38024){if((e38024 instanceof Error)){
+var e__27667__auto____$3 = e38024;
 if((e__27667__auto____$3 === cljs.core.match.backtrack)){
-try{if((ocr_28688 === (0))){
-var a = ocr_28685;
-var b = ocr_28686;
-var c = ocr_28687;
+try{if((ocr_38016 === (0))){
+var a = ocr_38013;
+var b = ocr_38014;
+var c = ocr_38015;
 if(app.merge.can_merge(a,b)){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null)], null);
 } else {
@@ -336,13 +336,13 @@ return null;
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28697){if((e28697 instanceof Error)){
-var e__27667__auto____$4 = e28697;
+}catch (e38025){if((e38025 instanceof Error)){
+var e__27667__auto____$4 = e38025;
 if((e__27667__auto____$4 === cljs.core.match.backtrack)){
-try{if((ocr_28687 === (0))){
-var c = ocr_28688;
-var a = ocr_28685;
-var b = ocr_28686;
+try{if((ocr_38015 === (0))){
+var c = ocr_38016;
+var a = ocr_38013;
+var b = ocr_38014;
 if(app.merge.can_merge(a,b)){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(3)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null)], null);
 } else {
@@ -357,13 +357,13 @@ return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"fr
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28698){if((e28698 instanceof Error)){
-var e__27667__auto____$5 = e28698;
+}catch (e38026){if((e38026 instanceof Error)){
+var e__27667__auto____$5 = e38026;
 if((e__27667__auto____$5 === cljs.core.match.backtrack)){
-try{if((ocr_28686 === (0))){
-var b = ocr_28687;
-var c = ocr_28688;
-var a = ocr_28685;
+try{if((ocr_38014 === (0))){
+var b = ocr_38015;
+var c = ocr_38016;
+var a = ocr_38013;
 if(app.merge.can_merge(a,b)){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(3)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null)], null);
 } else {
@@ -378,18 +378,18 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28699){if((e28699 instanceof Error)){
-var e__27667__auto____$6 = e28699;
+}catch (e38027){if((e38027 instanceof Error)){
+var e__27667__auto____$6 = e38027;
 if((e__27667__auto____$6 === cljs.core.match.backtrack)){
-try{if((ocr_28685 === (0))){
-var a = ocr_28686;
-var b = ocr_28687;
-var c = ocr_28688;
+try{if((ocr_38013 === (0))){
+var a = ocr_38014;
+var b = ocr_38015;
+var c = ocr_38016;
 if(app.merge.can_merge(a,b)){
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(3)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null)], null);
 } else {
 if(app.merge.can_merge(b,c)){
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(3)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null)], null);
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(3)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null)], null);
 } else {
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(3)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null)], null);
 
@@ -399,13 +399,13 @@ return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMP
 throw cljs.core.match.backtrack;
 
 }
-}catch (e28700){if((e28700 instanceof Error)){
-var e__27667__auto____$7 = e28700;
+}catch (e38028){if((e38028 instanceof Error)){
+var e__27667__auto____$7 = e38028;
 if((e__27667__auto____$7 === cljs.core.match.backtrack)){
-var a = ocr_28685;
-var b = ocr_28686;
-var c = ocr_28687;
-var d = ocr_28688;
+var a = ocr_38013;
+var b = ocr_38014;
+var c = ocr_38015;
+var d = ocr_38016;
 if(app.merge.can_merge(a,b)){
 if(app.merge.can_merge(c,d)){
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(0)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(2)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),false], null),new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(3)], null),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [row,(1)], null),new cljs.core.Keyword(null,"merged","merged",1648712643),true], null)], null);
@@ -429,56 +429,56 @@ return null;
 throw e__27667__auto____$7;
 }
 } else {
-throw e28700;
+throw e38028;
 
 }
 }} else {
 throw e__27667__auto____$6;
 }
 } else {
-throw e28699;
+throw e38027;
 
 }
 }} else {
 throw e__27667__auto____$5;
 }
 } else {
-throw e28698;
+throw e38026;
 
 }
 }} else {
 throw e__27667__auto____$4;
 }
 } else {
-throw e28697;
+throw e38025;
 
 }
 }} else {
 throw e__27667__auto____$3;
 }
 } else {
-throw e28696;
+throw e38024;
 
 }
 }} else {
 throw e__27667__auto____$2;
 }
 } else {
-throw e28695;
+throw e38023;
 
 }
 }} else {
 throw e__27667__auto____$1;
 }
 } else {
-throw e28694;
+throw e38022;
 
 }
 }} else {
 throw e__27667__auto__;
 }
 } else {
-throw e28693;
+throw e38021;
 
 }
 }});
@@ -489,12 +489,12 @@ app.merge.fix_right = (function app$merge$fix_right(transform){
 return cljs.core.update_in.cljs$core$IFn$_invoke$arity$3(cljs.core.update_in.cljs$core$IFn$_invoke$arity$3(transform,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"from","from",1815293044),(1)], null),app.merge.sub3),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"to","to",192099007),(1)], null),app.merge.sub3);
 });
 app.merge.fix_up = (function app$merge$fix_up(transform){
-var vec__28715 = new cljs.core.Keyword(null,"from","from",1815293044).cljs$core$IFn$_invoke$arity$1(transform);
-var fr = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__28715,(0),null);
-var fc = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__28715,(1),null);
-var vec__28718 = new cljs.core.Keyword(null,"to","to",192099007).cljs$core$IFn$_invoke$arity$1(transform);
-var tr = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__28718,(0),null);
-var tc = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__28718,(1),null);
+var vec__38043 = new cljs.core.Keyword(null,"from","from",1815293044).cljs$core$IFn$_invoke$arity$1(transform);
+var fr = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__38043,(0),null);
+var fc = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__38043,(1),null);
+var vec__38046 = new cljs.core.Keyword(null,"to","to",192099007).cljs$core$IFn$_invoke$arity$1(transform);
+var tr = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__38046,(0),null);
+var tc = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__38046,(1),null);
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(transform,new cljs.core.Keyword(null,"from","from",1815293044),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [fc,fr], null)),new cljs.core.Keyword(null,"to","to",192099007),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [tc,tr], null));
 });
 app.merge.transpose = (function app$merge$transpose(m){
@@ -502,9 +502,9 @@ return cljs.core.apply.cljs$core$IFn$_invoke$arity$3(cljs.core.mapv,cljs.core.ve
 });
 app.merge.transpose(new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [(1),(1),(0),(0)], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [(2),(2),(0),(0)], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [(3),(3),(0),(0)], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [(4),(4),(0),(0)], null)], null));
 app.merge.generate_board_moves = (function app$merge$generate_board_moves(board,direction){
-var G__28721 = direction;
-var G__28721__$1 = (((G__28721 instanceof cljs.core.Keyword))?G__28721.fqn:null);
-switch (G__28721__$1) {
+var G__38049 = direction;
+var G__38049__$1 = (((G__38049 instanceof cljs.core.Keyword))?G__38049.fqn:null);
+switch (G__38049__$1) {
 case "left":
 return cljs.core.flatten(cljs.core.filter.cljs$core$IFn$_invoke$arity$2(cljs.core.identity,cljs.core.map_indexed.cljs$core$IFn$_invoke$arity$2((function (idx,row){
 return app.merge.generate_row_moves(row,idx);
@@ -530,7 +530,7 @@ return app.merge.generate_row_moves(row,idx);
 
 break;
 default:
-throw (new Error(["No matching clause: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__28721__$1)].join('')));
+throw (new Error(["No matching clause: ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__38049__$1)].join('')));
 
 }
 });

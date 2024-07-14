@@ -7,8 +7,9 @@
             ["@react-three/drei/native" :as r3d]
             ["@react-spring/three" :as rs]
             [refx.alpha :as rfx]
-            [app.merge :as m]))
-
+            [app.merge :as m]
+            ["../js/test" :as t]
+            ["../js/model2" :as model2]))
 (defn init-board []
   (vec (for [i (range 4)] (vec (for [j (range 4)] {:tileval 0 :tilekey (+ (* 4 i) j) :pos-x j :pos-y i})))))
 
@@ -86,7 +87,9 @@
     (let [should-be-frozen-after? (> (:frozen-moves-left db) 1)]
       (-> db
           (assoc :frozen? should-be-frozen-after?)
-          (update :frozen-moves-left dec)))
+          (update :frozen-moves-left dec)
+          ;undo the movecount increase lmao
+          (update :movecount dec)))
     db))
 (defn update-random-db [db]
   (if (:fixed-randomness? db)
@@ -178,13 +181,20 @@
 (rfx/reg-event-db
   :clicked
   (fn [db [_ [pos-x pos-y]]]
-    (js/console.log (clj->js db))
     (let [can-remove? (:can-remove? db)
-          can-swap? (-> db :swap :can-swap?)]
+          can-swap? (-> db :swap :can-swap?)
+          tileval (get-in db [:board pos-y pos-x :tileval])]
+      (js/console.log (clj->js tileval))
       (cond 
-        can-remove? (-> db
-                      (remove-tile pos-x pos-y)
-                      (assoc :can-remove? false))
+        can-remove? (case tileval
+                      0 db
+                      :remove db
+                      :freeze db
+                      :random db
+                      :swap db
+                      (-> db
+                           (remove-tile pos-x pos-y)
+                           (assoc :can-remove? false)))
         can-swap? (handle-swap db pos-x pos-y)
         :else db))))
 
@@ -296,20 +306,20 @@
        (str "Score: " score))))
 
 (defui ui []
-  ($ rn/View {:style {:position "absolute"
-                      :top 0
-                      :left 0
-                      :width "100%"
-                      :height "100%"}}
+  ($ rn/View #js {:style #js {:position "absolute"
+                              :top 0
+                              :left 0
+                              :width "100%"
+                              :height "100%"}}
      ($ rn/StatusBar)
-     ($ rn/View {:style {:margin-top 10
-                         :margin-left 10
-                         :margin-right 10
-                         :height "20%"}}
-        ($ rn/View {:style {:flex 1
-                            :flexDirection "column"
-                            :justifyContent "center"
-                            :alignItems "center"}}
+     ($ rn/View #js {:style #js {:margin-top 10
+                                  :margin-left 10
+                                  :margin-right 10
+                                  :height "20%"}}
+        ($ rn/View #js {:style #js {:flex 1
+                                           :flexDirection "column"
+                                           :justifyContent "center"
+                                           :alignItems "center"}}
            ($ totalMoves)
            ($ score-board)))))
         
@@ -319,7 +329,7 @@
                        (rfx/dispatch [:initialize]))
             :position #js [0 -3.5 0]}
      ($ :boxGeometry)
-     ($ :meshStandardMaterial {:color "#22aa22"}))) 
+     ($ :meshStandardMaterial #js {:color "#22aa22"}))) 
        
 (defui board []
   (let [board (rfx/use-sub [:board])
@@ -331,14 +341,16 @@
 
 (defui root []
   ($ swipe-detector
-    ($ r3f/Canvas #_{:frameloop "demand"}
-        ($ :ambientLight {:intensity 3})
-        ($ r3d/PerspectiveCamera {:makeDefault true 
-                                  :rotation #js [0 0 0]
-                                  :position #js [0 0 12]})
-        ($ board)
-        ($ reset-button))
-    ($ ui)))
+      ($ r3f/Canvas #_{:frameloop "demand"}
+          ($ :ambientLight #js {:intensity 3})
+          ($ r3d/PerspectiveCamera #js {:makeDefault true 
+                                        :rotation #js [0 0 0]
+                                        :position #js [0 0 12]})
+          ($ board)
+          ($ reset-button)
+          ($ model2/Model2)
+          #_($ :primitive #js {:object model2}))
+      ($ ui)))
         
 
 (defn ^:export init []

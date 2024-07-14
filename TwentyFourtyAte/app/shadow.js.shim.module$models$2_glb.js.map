@@ -1,0 +1,9 @@
+{
+"version":3,
+"file":"shadow.js.shim.module$models$2_glb.js",
+"lineCount":5,
+"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,oCAAb,CAAA;AACAD,IAAKC,CAAAA,OAAL,CAAa,2CAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,mBAAf,GAAqCH,MAAOC,CAAAA,EAAGG,CAAAA,cAAV,CAAyB,cAAzB,CAArC,GAAgFC,OAAA,CAAQ,cAAR,CAAhF;AACAC,yCAA0CC,CAAAA,OAA1C,GAAoDP,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,mBAAnE;;",
+"sources":["shadow.js.shim.module$models$2_glb.js"],
+"sourcesContent":["goog.provide(\"shadow.js.shim.module$models$2_glb\");\ngoog.provide(\"module$shadow_js_shim_module$models$2_glb\");\nshadow.js.shim.module$models$2_glb = shadow.js.nativeProvides[\"models/2.glb\"] = require(\"models/2.glb\");\nmodule$shadow_js_shim_module$models$2_glb.default = shadow.js.shim.module$models$2_glb;\n"],
+"names":["goog","provide","shadow","js","shim","module$models$2_glb","nativeProvides","require","module$shadow_js_shim_module$models$2_glb","default"]
+}

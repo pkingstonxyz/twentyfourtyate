@@ -1,0 +1,9 @@
+{
+"version":3,
+"file":"shadow.js.shim.module$assets$models$2_glb$default.js",
+"lineCount":3,
+"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,mDAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,kCAAf,GAAoDH,MAAOC,CAAAA,EAAGC,CAAAA,IAAKE,CAAAA,0BAA2BC,CAAAA,OAA9F;;",
+"sources":["shadow.js.shim.module$assets$models$2_glb$default.js"],
+"sourcesContent":["goog.provide(\"shadow.js.shim.module$assets$models$2_glb$default\");\nshadow.js.shim.module$assets$models$2_glb$default = shadow.js.shim.module$assets$models$2_glb.default;\n"],
+"names":["goog","provide","shadow","js","shim","module$assets$models$2_glb$default","module$assets$models$2_glb","default"]
+}

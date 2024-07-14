@@ -51,7 +51,7 @@
                                           {:from [row 3] :to [row 1] :merged false}]
                          (can-merge b c) [{:from [row 1] :to [row 0] :merged false}
                                           {:from [row 2] :to [row 1] :merged false}
-                                          {:from [row 3] :to [row 2] :merged true}]
+                                          {:from [row 3] :to [row 1] :merged true}]
                          :else [{:from [row 1] :to [row 0] :merged false}
                                 {:from [row 2] :to [row 1] :merged false}
                                 {:from [row 3] :to [row 2] :merged false}])
@@ -89,8 +89,8 @@
             [4 4 0 0]])
 
 (defn generate-board-moves [board direction]
-  (case direction
-       :left (flatten (filter identity (map-indexed (fn [idx row] (generate-row-moves row idx)) board)))
-       :right (map fix-right (flatten (filter identity (map-indexed (fn [idx row] (generate-row-moves row idx)) (map reverse board)))))
-       :up (map fix-up (flatten (filter identity (map-indexed (fn [idx row] (generate-row-moves row idx)) (transpose board)))))
-       :down (map fix-up (map fix-right (flatten (filter identity (map-indexed (fn [idx row] (generate-row-moves row idx)) (map reverse (transpose board)))))))))
+    (case direction
+             :left (flatten (filter identity (map-indexed (fn [idx row] (generate-row-moves row idx)) board)))
+             :right (map fix-right (flatten (filter identity (map-indexed (fn [idx row] (generate-row-moves row idx)) (map reverse board)))))
+             :up (map fix-up (flatten (filter identity (map-indexed (fn [idx row] (generate-row-moves row idx)) (transpose board)))))
+             :down (map fix-up (map fix-right (flatten (filter identity (map-indexed (fn [idx row] (generate-row-moves row idx)) (map reverse (transpose board)))))))))

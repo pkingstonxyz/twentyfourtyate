@@ -1,0 +1,9 @@
+{
+"version":3,
+"file":"module$js$test.js",
+"lineCount":8,
+"mappings":"AAAOA,QAASA,sBAAK,EAAG;AACtBC,SAAQC,CAAAA,GAAR,CAAY,OAAZ,CAAA;AADsB;AAAxB;AAAA,IAAAC,iBAAA,EAAA;AAAgBH;AAAAA,cAAAA,CAAAA,KAAAA,GAAAA,qBAAAA;;",
+"sources":["js/test.js"],
+"sourcesContent":["export function Hello() {\n  console.log(\"hello\");\n}\n"],
+"names":["Hello","console","log","$jscomp$tmp$exports$module$name"]
+}
