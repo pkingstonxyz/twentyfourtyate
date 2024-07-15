@@ -27,10 +27,10 @@
                  :tile-1-pos nil}
           :base-probabilities {2 90
                                4 6
-                               :freeze 1
-                               :remove 1
-                               :swap 1
-                               :random 1}
+                               :freeze 0
+                               :remove 0
+                               :swap 0
+                               :random 0}
           :fixed-probabilities {2 1}
           :fixed-randomness? false
           :fixed-random-moves-left 0}
@@ -248,8 +248,9 @@
                                           (rfx/dispatch [:move :up]))))))}
        children)))
 
+(def AnimatedModel (rs/animated meshes/Model))
 (defui tile [{:keys [tileinfo key]}]
-  (let [scale 1.2
+  (let [scale 1.3
         pos-x (:pos-x tileinfo)
         pos-y (:pos-y tileinfo)
         tileval (:tileval tileinfo)
@@ -259,41 +260,72 @@
                                    :config #js {:mass 1
                                                 :tension 1000
                                                 :friction 30}})
+        #_#_transition (rs/useTransition (:tileval tileinfo))
         transition (rs/useTransition (:tileval tileinfo)
                                      #js {:from #js {:scale 0.5}
                                           :enter #js {:scale 1}
-                                          :leave #js {:scale 0}
+                                          #_#_:leave #js {:scale 0.5}
                                           :config #js {:mass 1
                                                        :tension 600
                                                        :friction 30}})]
-    (transition (fn [scale item]
-                  ($ rs/animated.mesh {:key key
-                                       :position (.-position springs)
-                                       :scale (.-scale scale)
-                                       :onClick (fn [_]
-                                                  (case tileval
-                                                    :freeze (rfx/dispatch [:freeze [pos-x pos-y]])
-                                                    :remove (rfx/dispatch [:remove-sauce [pos-x pos-y]])
-                                                    :swap   (rfx/dispatch [:swap-sauce [pos-x pos-y]])
-                                                    :random (rfx/dispatch [:random-sauce [pos-x pos-y]])
-                                                    (rfx/dispatch [:clicked [pos-x pos-y]])))}
-                           ($ :boxGeometry)
-                           ($ :meshStandardMaterial {:color ({0    "#ffffff"
-                                                              2    "#c86a6d"
-                                                              4    "#cc6b3e"
-                                                              8    "#e19c3d"
-                                                              16   "#b7a852"
-                                                              32   "#9cb36b"
-                                                              64   "#89a990"
-                                                              128  "#709997"
-                                                              256  "#6494aa"
-                                                              512  "#967fad"
-                                                              1024 "#c769b0"
-                                                              2048 "#000000"
-                                                              :freeze "#0000ff"
-                                                              :remove "#ff0000"
-                                                              :swap   "#ffff00"
-                                                              :random "#00ff00"} tileval)}))))))
+    (transition (fn [scale _]
+                  ($ AnimatedModel #js {:key key
+                                        :position (.-position springs)
+                                        :scale (.-scale scale)
+                                        :rotation #js [(/ 3.14159 2) 0 0]
+                                        :onClick (fn [_]
+                                                   (case tileval
+                                                     :freeze (rfx/dispatch [:freeze [pos-x pos-y]])
+                                                     :remove (rfx/dispatch [:remove-sauce [pos-x pos-y]])
+                                                     :swap   (rfx/dispatch [:swap-sauce [pos-x pos-y]])
+                                                     :random (rfx/dispatch [:random-sauce [pos-x pos-y]])
+                                                     (rfx/dispatch [:clicked [pos-x pos-y]])))
+                                        :val tileval})))) 
+  #_(let [scale 1.2
+          pos-x (:pos-x tileinfo)
+          pos-y (:pos-y tileinfo)
+          tileval (:tileval tileinfo)
+          springs (rs/useSpring #js {:position #js [(* scale (- (- (:pos-x tileinfo) 0) 1.5))
+                                                    (* scale (- (- 3 (:pos-y tileinfo)) 1.5))
+                                                    0]
+                                     :config #js {:mass 1
+                                                  :tension 1000
+                                                  :friction 30}})
+          transition (rs/useTransition (:tileval tileinfo)
+                                       #js {:from #js {:scale 0.5}
+                                            :enter #js {:scale 1}
+                                            :leave #js {:scale 0}
+                                            :config #js {:mass 1
+                                                         :tension 600
+                                                         :friction 30}})]
+      (transition (fn [scale item]
+                    ($ rs/animated.mesh {:key key
+                                         :position (.-position springs)
+                                         :scale (.-scale scale)
+                                         :onClick (fn [_]
+                                                    (case tileval
+                                                      :freeze (rfx/dispatch [:freeze [pos-x pos-y]])
+                                                      :remove (rfx/dispatch [:remove-sauce [pos-x pos-y]])
+                                                      :swap   (rfx/dispatch [:swap-sauce [pos-x pos-y]])
+                                                      :random (rfx/dispatch [:random-sauce [pos-x pos-y]])
+                                                      (rfx/dispatch [:clicked [pos-x pos-y]])))}
+                             ($ :boxGeometry)
+                             ($ :meshStandardMaterial {:color ({0    "#ffffff"
+                                                                2    "#c86a6d"
+                                                                4    "#cc6b3e"
+                                                                8    "#e19c3d"
+                                                                16   "#b7a852"
+                                                                32   "#9cb36b"
+                                                                64   "#89a990"
+                                                                128  "#709997"
+                                                                256  "#6494aa"
+                                                                512  "#967fad"
+                                                                1024 "#c769b0"
+                                                                2048 "#000000"
+                                                                :freeze "#0000ff"
+                                                                :remove "#ff0000"
+                                                                :swap   "#ffff00"
+                                                                :random "#00ff00"} tileval)}))))))
 
 (defui totalMoves []
   (let [movecount (rfx/use-sub [:movecount])]
@@ -343,15 +375,20 @@
 (defui root []
   ($ swipe-detector
       ($ r3f/Canvas #_{:frameloop "demand"}
-          ($ :ambientLight #js {:intensity 3})
+          ($ :ambientLight #js {:intensity 2})
+          ($ :pointLight #js {:position #js [0 0 12]
+                              :intensity 100})
           ($ r3d/PerspectiveCamera #js {:makeDefault true 
                                         :rotation #js [0 0 0]
                                         :position #js [0 0 12]})
           ($ board)
           ($ reset-button)
-          ($ r/Suspense
-             ($ meshes/Model #js {:position #js [1 1 1]
-                                  :rotation #js [(/ 3.1415 2) 0 0]})))
+          #_($ r/Suspense
+               ($ meshes/Model 
+                  #js {:position #js [0 0 1]
+                       :rotation #js [(/ 3.1415 2) 0 0]
+                       :val 32})))
+                
       ($ ui)))
         
 
