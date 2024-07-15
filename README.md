@@ -14,7 +14,8 @@ An food themed version of 2048 with sauce :)
  - [x] Add remove sauce
  - [x] Add swap sauce
  - [x] Add randomness modifier sauce
- - [ ] Model out tiles
+ - [x] Model out tiles
+ - [ ] Add models to game
  - [ ] Model out reset button
  - [ ] Model out plate
  - [ ] Polish score counter

@@ -9,7 +9,7 @@
             [refx.alpha :as rfx]
             [app.merge :as m]
             ["../js/test" :as t]
-            ["../js/model2" :as model2]))
+            ["../js/meshes" :as meshes]))
 (defn init-board []
   (vec (for [i (range 4)] (vec (for [j (range 4)] {:tileval 0 :tilekey (+ (* 4 i) j) :pos-x j :pos-y i})))))
 
@@ -330,7 +330,8 @@
             :position #js [0 -3.5 0]}
      ($ :boxGeometry)
      ($ :meshStandardMaterial #js {:color "#22aa22"}))) 
-       
+
+
 (defui board []
   (let [board (rfx/use-sub [:board])
         tiles (->> board
@@ -349,9 +350,8 @@
           ($ board)
           ($ reset-button)
           ($ r/Suspense
-             ($ model2/Model2 #js {:position #js [1 1 1]
-                                   :rotation #js [(/ 3.1415 2) 0 0]}))
-          #_($ :primitive #js {:object model2}))
+             ($ meshes/Model #js {:position #js [1 1 1]
+                                  :rotation #js [(/ 3.1415 2) 0 0]})))
       ($ ui)))
         
 
