@@ -15,7 +15,7 @@ export function Model(props) {
     mesh128color: 0xE7544A, num128color: 0xE79690,
     mesh256color: 0xA1513D, num256color: 0x401A25,
     mesh512color: 0xBDE766, num512color: 0x1D480F,
-    mesh1024color: 0xE7D9AF, num1024color: 0xE7E600,
+    mesh1024whitecolor: 0xE7D9AF, mesh1024yolkcolor: 0xE7E699, num1024color: 0x808000,
     mesh2048color: 0xE7A84A, num2048color: 0x000000,
   };
   return React.createElement(
@@ -162,10 +162,18 @@ export function Model(props) {
 			visible: props.val >= 1024 ? true : false,
       castShadow: true,
       receiveShadow: true,
-      geometry: nodes['1024mesh'].geometry,
+      geometry: nodes['1024meshwhite'].geometry,
       rotation: [-0.005, 0.003, -0.045],
       scale: [0.5, 0.051, 0.5]
-    }, React.createElement('MeshStandardMaterial', {color: color.mesh1024color})),
+    }, React.createElement('MeshStandardMaterial', {color: color.mesh1024whitecolor})),
+    React.createElement('mesh', {
+			visible: props.val >= 1024 ? true : false,
+      castShadow: true,
+      receiveShadow: true,
+      geometry: nodes['1024meshyolk'].geometry,
+      rotation: [-0.005, 0.003, -0.045],
+      scale: [0.5, 0.051, 0.5]
+    }, React.createElement('MeshStandardMaterial', {color: color.mesh1024yolkcolor})),
     React.createElement('mesh', {
 			visible: props.val == 1024 ? true : false,
       castShadow: true,

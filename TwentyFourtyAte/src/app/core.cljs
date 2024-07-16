@@ -381,7 +381,8 @@
           ($ r3d/PerspectiveCamera #js {:makeDefault true 
                                         :rotation #js [0 0 0]
                                         :position #js [0 0 12]})
-          ($ board)
+          ($ r/Suspense
+             ($ board))
           ($ reset-button)
           #_($ r/Suspense
                ($ meshes/Model 
