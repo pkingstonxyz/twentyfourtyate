@@ -23,7 +23,6 @@ function Model$$module$js$meshes(props) {
   0.051, 0.5]}, shadow.js.shim.module$react.createElement("MeshStandardMaterial", {color:color.mesh1024yolkcolor})), shadow.js.shim.module$react.createElement("mesh", {visible:props.val == 1024 ? true : false, castShadow:true, receiveShadow:true, geometry:nodes["1024num"].geometry, rotation:[-0.005, 0.003, -0.045], scale:[0.5, 0.051, 0.5]}, shadow.js.shim.module$react.createElement("MeshStandardMaterial", {color:color.num1024color})), shadow.js.shim.module$react.createElement("mesh", {visible:props.val >= 
   2048 ? true : false, castShadow:true, receiveShadow:true, geometry:nodes["2048mesh"].geometry, scale:[0.548, 0.05, 0.548]}, shadow.js.shim.module$react.createElement("MeshStandardMaterial", {color:color.mesh2048color})), shadow.js.shim.module$react.createElement("mesh", {visible:props.val == 2048 ? true : false, castShadow:true, receiveShadow:true, geometry:nodes["2048num"].geometry, scale:[0.548, 0.05, 0.548]}, shadow.js.shim.module$react.createElement("MeshStandardMaterial", {color:color.num2048color})));
 }
-shadow.js.shim.module$$react_three$drei.useGLTF.preload("https://github.com/pkingstonxyz/twentyfourtyate/raw/main/TwentyFourtyAte/assets/models/burgerparts.glb");
 /** @const */ 
 var module$js$meshes = {};
 /** @const */ 

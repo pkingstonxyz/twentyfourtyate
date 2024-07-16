@@ -199,4 +199,4 @@ export function Model(props) {
   );
 }
 
-useGLTF.preload("https://github.com/pkingstonxyz/twentyfourtyate/raw/main/TwentyFourtyAte/assets/models/burgerparts.glb")
+//useGLTF.preload("https://github.com/pkingstonxyz/twentyfourtyate/raw/main/TwentyFourtyAte/assets/models/burgerparts.glb")
